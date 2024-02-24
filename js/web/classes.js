@@ -34,8 +34,30 @@ class Plant
 
     makePage()
     {
-        document.implementation.createHTMLDocument(this.commonName);
         // Make the new webpage
+        let doc = document.implementation.createHTMLDocument(this.commonName);
+        
+        // CREATE ELEMENTS ----------------------------------------
+
+        // CREATE INFO --------------------------------------------
+
+        // HEADER CODE
+        // NAVBAR CODE
+
+        // IMAGE CODE
+        let imageString = 
+        // NAMES CODE
+        // INFO1 CODE
+        // INFO2 CODE
+
+        // FOOTER CODE
+
+        // POPULATE DIVS ------------------------------------------
+
+        // ADD CSS CLASSES ----------------------------------------
+
+        // APPEND ELEMENTS ----------------------------------------
+
         //idk if redirect would go here, another method, or somewhere else entirely
     }
 }
