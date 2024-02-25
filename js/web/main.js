@@ -96,7 +96,7 @@ function plantLoaded(e, index)
         obj.main_species.growth.soil_nutriements,
         obj.main_species.distribution.native
         );
-    plantCard.makeCard();
+    plantCard.makeCard();   // did i break it?
     let card = document.createElement("div");
     card.innerHTML = plantCard.card;
     card.classList.add("card");
