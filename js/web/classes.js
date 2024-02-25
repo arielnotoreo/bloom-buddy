@@ -19,7 +19,7 @@ class Plant
         tempString += `<p>Humidity: ${this.humidity}</p>`
         tempString += `<p>Temperature: ${this.minTemp}-${this.maxTemp}</p>`
         tempString += `<p>Native Location(s): ${this.nativeLocation}</p>`
-        tempString += '<div id="moreBtn"><button type="button">More info</button></div>'
+        tempString += '<div id="moreBtnContain"><button type="button" id="moreBtn">More info</button></div>'
         tempString += "</div>"
         tempString += "</div>"
 
