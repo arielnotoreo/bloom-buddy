@@ -43,6 +43,7 @@ let lightSprite;
 let waterSprite;
 
 // plant tracker variables
+
 let numClicks = 0;
 let isWatered = false;
 
@@ -168,46 +169,19 @@ function fillTutorialScene() {
     tutorialScreen.addChild(gameButton);
 }
 
-
 /*
 function name: fillGameScene
 purpose: populates game objects into game scene
 worked on by: McKenzie Lam*/
 
 function fillGameScene() {
-    // create game buttons
-    /*
-    let gameButton = new PIXI.Text("LOSE");
-    gameButton.style = genericButtonStyle;
-    gameButton.x = sceneWidth/2 - 50;
-    gameButton.y = sceneHeight - 200;
-    gameButton.interactive = true;
-    gameButton.buttonMode = true;
-    gameButton.on("pointerup", function() {
-        goGameOver();
-    });
-    gameButton.on('pointerover', e => e.target.alpha = 0.7);
-    gameButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
-    gameScreen.addChild(gameButton); */
+    // create the game buttons
 
-    /*
-    let plant = new PIXI.Text("PLANT");
-    plant.style = genericButtonStyle;
-    plant.x = sceneWidth/2 - 50;
-    plant.y = sceneHeight - 200;
-    plant.interactive = true;
-    plant.buttonMode = true;
-    plant.on("pointerup", function() {
-        goGameOver();
-    });
-    plant.on('pointerover', e => e.target.alpha = 0.7);
-    plant.on('pointerout', e => e.currentTarget.alpha = 1.0);
-    gameScreen.addChild(plant); */
-
+    // water button
     let waterButton = new PIXI.Sprite(waterSprite);
     waterButton.width = 100;
     waterButton.height = 100;
-    waterButton.x = sceneWidth/2 - 200;
+    waterButton.x = 150;
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
@@ -216,6 +190,33 @@ function fillGameScene() {
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
 
+    // light button
+    let lightButton = new PIXI.Sprite(lightSprite);
+    lightButton.width = 100;
+    lightButton.height = 100;
+    lightButton.x = 350;
+    lightButton.y = sceneHeight - 150;
+    lightButton.interactive = true;
+    lightButton.buttonMode = true;
+    lightButton.on("pointerup", clicked);
+    lightButton.on('pointerover', e => e.target.alpha = 0.7);
+    lightButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    gameScreen.addChild(lightButton);
+
+    // turn button
+    let turnButton = new PIXI.Sprite(waterSprite);
+    turnButton.width = 100;
+    turnButton.height = 100;
+    turnButton.x = 550;
+    turnButton.y = sceneHeight - 150;
+    turnButton.interactive = true;
+    turnButton.buttonMode = true;
+    turnButton.on("pointerup", clicked);
+    turnButton.on('pointerover', e => e.target.alpha = 0.7);
+    turnButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    gameScreen.addChild(turnButton);
+
+    // temp label
     let waterLabel = new PIXI.Text("Water");
     waterLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
@@ -226,33 +227,16 @@ function fillGameScene() {
     waterLabel.y = sceneHeight - 100;
     gameScreen.addChild(waterLabel);
 
-    let plant = new Plant(plantSprite, 0, 1, 2, 0, 0);
+    // create the plant
+    let plant = new Plant(plantSprite, 100, 100);
+    gameScreen.addChild(plant.container);
+    plant.setPosition(sceneWidth / 2, 200);
 
-    /*
-    let tempText = new PIXI.Text(numClicks);
-    tempText.style = new PIXI.TextStyle({
-        fill: 0xffffff,
-        fontSize: 56,
-        fontFamily: 'Arial'
-    });
-    tempText.x = 10;
-    tempText.y = 10;
-    gameScreen.addChild(tempText);
-
-    let boolText = new PIXI.Text(isWatered);
-    boolText.style = new PIXI.TextStyle({
-        fill: 0xffffff,
-        fontSize: 56,
-        fontFamily: 'Arial'
-    });
-    boolText.x = 40;
-    boolText.y = 40;
-    gameScreen.addChild(boolText);
-    */
+    // begin the game
+    //gameLoop();
 }
 
 // MOVE THESE METHODS LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 function clicked() {
     numClicks++;
@@ -267,9 +251,6 @@ function clicked() {
 }
 
 // ----------------------------------------------------
-
-
-
 
 function fillGameOverScene() {
     let text = new PIXI.Text("This is the womp womp");
@@ -319,3 +300,12 @@ function goGameOver() {
     fillGameOver();
 }
 //#endregion
+
+function gameLoop()
+{
+    while (plant.alive == true)
+    {
+        plant.WaterTracker();
+        plant.IsAlive();
+    }
+}
