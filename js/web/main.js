@@ -9,7 +9,7 @@ let pageIndex = 1;
 // Execute when the window has loaded
 window.onload = function(e) 
 {
-    let url = PLANTAPI_URL + "/api/v1/plants/search?" + token + "&page=" + pageIndex;
+    let url = PLANTAPI_URL + "/api/v1/plants?" + token + "&page=" + pageIndex;
     getSpecies(url);
 }
 
