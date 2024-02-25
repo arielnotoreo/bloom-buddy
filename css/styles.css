@@ -52,7 +52,13 @@ button {
 
 h1 {
     font-size: 5vh;
+    margin: 0;
 }
+header h1 {
+    font-size: 5vh;
+}
+
+
 
 h2 {
     font-size: 3vh;
@@ -60,6 +66,7 @@ h2 {
 
 select,
 input {
+    background-color: #fbeee0;
     border-radius: 25px;
     width: 40vw;
     height: 4vh;
@@ -99,35 +106,36 @@ button:active {
     transform: translate(2px, 2px);
 }
 
-@media (max-width: 968px) {
-    button {
-        min-width: 120px;
-        font-size: 14px;
-        padding: 0 25px;
-    }
-
-    #pageBtns button {
-        width: 10%;
-    }
-}
-
 header {
     display: flex;
     flex-wrap: wrap;
     border-radius: 25px;
-    height: 200px;
+    height: 30vh;
     width: 40vw;
+    margin: 12%;
+    padding-left: 20px;
     color: white;
-    background: rgba(193, 56, 56, 0.5);
+    background: rgba(201, 47, 186, 0.908);
 
 }
 
 #contentHeader {
-    border-bottom: dotted brown;
+    padding: 1px 0;
+    background-color: #54856d;
+    text-align: center;
+    border-bottom: dotted rgb(67, 52, 57);
 }
 
 #content {
-    background-color: #db87c5;
+    background-color: pink;
+}
+
+header a {
+    border-radius: 30px;
+    height: 3vh;
+    margin: auto;
+    background-color: #54856d;
+
 }
 
 /* Add a black background color to the top navigation */
@@ -151,7 +159,7 @@ nav a {
 /* Change the color of links on hover */
 nav a:hover {
     background-color: #deefff;
-    color: #3b3333;
+    color: #54856d;;
 }
 
 nav image {
@@ -159,6 +167,7 @@ nav image {
 }
 
 header img {
+    height: 40px;
     width: 200px;
 }
 
@@ -185,10 +194,48 @@ body {
     background-color: #70a589;
 }
 
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
 
-
+footer {
+    padding: 2%;
+    background-color: #54856d;
+}
 
 select {
     background-color: #fbeee0;
+}
+
+@media (max-width: 968px) {
+    button {
+        min-width: 120px;
+        font-size: 14px;
+        padding: 0 25px;
+    }
+
+    #pageBtns button {
+        width: 10%;
+    }
+    header {
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 25px;
+        height: 40vh;
+        width: 50vw;
+        margin: 6%;
+        padding-left: 20px;
+        color: white;
+        background: rgba(227, 148, 213, 0.5);
+    
+    }
+    header a {
+        margin: 0;
+        height: 5vh;
+        background-color: #54856d;
+    
+    }
 }
 
