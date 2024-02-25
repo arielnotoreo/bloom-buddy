@@ -100,14 +100,16 @@ function plantLoaded(e, index)
     let card = document.createElement("div");
     card.innerHTML = plantCard.card;
     card.classList.add("card");
-    document.querySelector("#moreBtn").onclick = moreClick(plantCard);
-
     let content = document.querySelector("#content");
     content.appendChild(card);
+
+    document.querySelector("#moreBtn").onclick = moreClick(plantCard);
 
 }
 
 function moreClick(plantCard)
 {
-    // window.location.href = plantCard.makePage();
+    let old = document.querySelector("#card");
+    let content = document.querySelector("#content");
+    content.replaceChild(plantCard.makePage(), old);
 }

@@ -62,14 +62,14 @@ class Plant
 
     makePage()
     {
-        // Make the new webpage
-        let doc = document.implementation.createHTMLDocument(this.commonName);
+        // Make the new container
+        let wrap = document.createElement("div");
         
         // CREATE ELEMENTS ----------------------------------------
-        let image = doc.createElement("div");
-        let names = doc.createElement("div");
-        let info1 = doc.createElement("div");
-        let info2 = doc.createElement("div");
+        let image = document.createElement("div");
+        let names = document.createElement("div");
+        let info1 = document.createElement("div");
+        let info2 = document.createElement("div");
 
         //#region  CREATE INFO --------------------------------------------
 
@@ -121,13 +121,13 @@ class Plant
 
         // INFO2 CODE
         let info2String = "";
-        info1String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
-        info1String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
-        info1String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
-        info1String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
-        info1String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
-        info1String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
-        info1String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
+        info2String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
+        info2String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
+        info2String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
+        info2String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
+        info2String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
+        info2String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
+        info2String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
 
         // FOOTER CODE
 
@@ -144,9 +144,14 @@ class Plant
         names.classList.add("names");
         info1.classList.add("info1");
         info2.classList.add("info2");
+        wrap.classList.add("card");
 
         // APPEND ELEMENTS (None?) --------------------------------
+        wrap.appendChild(image);
+        wrap.appendChild(names);
+        wrap.appendChild(info1);
+        wrap.appendChild(info2);
 
-        return doc.URL;
+        return wrap;
     }
 }
