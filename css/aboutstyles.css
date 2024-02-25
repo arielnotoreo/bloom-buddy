@@ -91,8 +91,7 @@ h1 {
 }
 
 header h1 {
-    font-size: 7vh;
-    margin: 0;
+    font-size: 5vh;
     animation-duration: 3s;
     animation-name: slidein1;
 }
@@ -159,9 +158,12 @@ header {
     display: flex;
     flex-wrap: wrap;
     border-radius: 25px;
-    height: 30vh;
-    width: 40vw;
+    position: absolute;
+    top:200px;
+    height: 10vh;
+    width: 50vw;
     margin: 12%;
+   
     padding-left: 20px;
     color: white;
     background: rgba(189, 201, 227, 0.908);
@@ -180,23 +182,6 @@ header {
     font-weight: 300;
     font-style: normal;
     background-color: #fbeee0;
-}
-
-#content .card {
-    width: 33vw;
-    height: 10vh;
-    background-color: white;
-}
-
-#content .card image {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-}
-
-
-#filters {
-    border-bottom: dotted rgb(67, 52, 57);
 }
 
 header a {
@@ -260,6 +245,7 @@ header img {
     padding: 10px 0;
 }
 
+
 body {
     padding: 0%;
     box-sizing: border-box;
@@ -295,6 +281,7 @@ select {
     header {
         display: flex;
         flex-wrap: wrap;
+        margin: auto;
         border-radius: 25px;
         margin: 6%;
         padding-left: 20px;
