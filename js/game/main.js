@@ -48,6 +48,7 @@ let waterSprite;
 let turnSprite;
 
 // plant tracker variables
+let plant;
 
 let numClicks = 0;
 let isWatered = false;
@@ -192,7 +193,7 @@ function fillGameScene() {
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
-    //waterButton.on("pointerup", clicked);
+    waterButton.on("pointerdown", function(){watterButtonClicked = true;});
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -257,12 +258,12 @@ function fillGameScene() {
     //#endregion
 
     // create the plant
-    let plant = new Plant(plantSprite, 100, 100);
+    plant = new Plant(plantSprite, 100, 100);
     gameScreen.addChild(plant.container);
     plant.setPosition(sceneWidth / 2, 200);
 
     // begin the game
-    //gameLoop();
+    gameLoop();
 }
 
 function fillGameOverScene() {
@@ -314,11 +315,103 @@ function goGameOver() {
 }
 //#endregion
 
+
 function gameLoop()
 {
-    while (plant.alive == true)
+    let waterButtonClicked = false;
+    let lightButtonClicked = false;
+    let rotationButtonClicked = false;
+
+    if (indoorPlant)
     {
-        plant.WaterTracker();
-        plant.IsAlive();
+        let waterTracker = new WaterTracker(3, 6);
+
+        while (plant.alive == true)
+        {
+            //day cycle
+            DayCycle(0);
+
+            WaterTracker(waterTracker);
+        }
+    }
+    else if (outdoorPlant)
+    {
+        let waterTracker = new WaterTracker(1, 3);
+
+        while (plant.alive == true)
+        {
+            //day cycle
+            DayCycle(0);
+    
+            
+    
+            plant.WaterTracker();
+            plant.IsAlive();
+        }
+    }
+}
+
+//keeps track of the day counting and screen
+function DayCycle(dayCounter)
+{
+    //this part can be subject to move to the main js file depending on how shit goes
+    if (dayCounter % 2 == 0)
+    {
+        //display daytime screen
+    }
+    else if (dayCounter % 2 == 1)
+    {
+        //display nighttime screen
+    }
+
+    dayCounter++;
+
+    setTimeout(function(){DayCycle(dayCounter)}, 30000);
+
+    //possibly figure out if we need a reset if game over
+
+    
+}
+
+function WaterTracker(waterTracker)
+{
+    waterTracker.startTimer();
+
+    if (waterButtonClicked)
+    {
+        waterTracker.daysSince = 0;
+        waterTracker.count++;       
+    }
+    else
+    {
+        waterTracker.daysSince++;
+    }
+    
+    if (waterTracker.isLimitReached)
+    {
+        plant.alive = false;
+    }
+    else
+    {
+        waterTracker.count = 0;
+    }
+
+    waterTracker.resetTimer();
+}
+
+function LightTracker(frequency, maxLimit)
+{
+    let lightTracker = new LightTracker(frequency, maxLimit);
+
+    lightTracker.startTimer();
+
+    if (watterButtonClicked)
+    {
+        lightTracker.count++;
+        lightTracker.resetTimer();
+    }
+    else
+    {
+        lightTracker.resetTimer();
     }
 }
