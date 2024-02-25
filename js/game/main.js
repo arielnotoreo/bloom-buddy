@@ -25,8 +25,9 @@ const sceneWidth = app.view.width;
 const sceneHeight = app.view.height;
 
 // load in assets -------------------------
-// this'll be done with 
-app.loader.add("");
+app.loader.add(`../images/test-light-sprite.png`);
+app.loader.add(`../images/test-plant-sprite.png`);
+app.loader.add('images/test-water-sprite.png');
 app.loader.onComplete.add(setup);
 app.loader.load();
 
@@ -36,6 +37,8 @@ let mainMenuScreen;
 let tutorialScreen;
 let gameScreen;
 let gameOverScreen;
+let plantSprite;
+let lightSprite;
 
 // create generic button style
 let genericButtonStyle = new PIXI.TextStyle({
@@ -45,6 +48,12 @@ let genericButtonStyle = new PIXI.TextStyle({
 });
 
 // FUNCTIONS -------------------------------------------------------------
+
+function loadSprites() {
+    plantSprite = new PIXI.Texture.from(images/test-plant-sprite.png);
+    
+    lightSprite = new PIXI.Texture.from(images/test-light-sprite.png);
+}
 
 /*
 function name: setup
@@ -160,6 +169,7 @@ worked on by: McKenzie Lam
 */
 function fillGameScene() {
     // create game buttons
+    /*
     let gameButton = new PIXI.Text("LOSE");
     gameButton.style = genericButtonStyle;
     gameButton.x = sceneWidth/2 - 50;
@@ -171,7 +181,7 @@ function fillGameScene() {
     });
     gameButton.on('pointerover', e => e.target.alpha = 0.7);
     gameButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
-    gameScreen.addChild(gameButton);
+    gameScreen.addChild(gameButton); */
 
     let plant = new PIXI.Text("PLANT");
     plant.style = genericButtonStyle;
@@ -184,11 +194,49 @@ function fillGameScene() {
     });
     plant.on('pointerover', e => e.target.alpha = 0.7);
     plant.on('pointerout', e => e.currentTarget.alpha = 1.0);
-    plant.addChild(gameButton);
+    gameScreen.addChild(plant);
 
-    let mom = new Plant();
+    let mom = new Plant(plantSprite, 0, 3, 4, 2, 1);
+    
+    let waterSprite = PIXI.Texture.from('images/test-water-sprite.png');
+    let waterButton = new PIXI.Sprite(waterSprite);
+    waterButton.width = 100;
+    waterButton.height = 100;
+    waterButton.x = sceneWidth/2 - 50;
+    waterButton.y = sceneHeight - 200;
+    waterButton.interactive = true;
+    waterButton.buttonMode = true;
+    waterButton.on("pointerup", clicked);
+    waterButton.on('pointerover', e => e.target.alpha = 0.7);
+    waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    
+    gameScreen.addChild(waterButton);
 
 }
+
+// MOVE THESE METHODS LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!
+function onButtonDown() {
+    this.isdown = true;
+    this.sprite.tint = 0xff0000;
+}
+
+let numClicks = 0;
+let isWatered = false;
+function clicked() {
+    numClicks++;
+    if (numClicks == 1)
+    {
+        isWatered = true;
+    }
+    else {
+        isWatered = false;
+    }
+}
+
+// ----------------------------------------------------
+
+
+
 
 function fillGameOverScene() {
     let text = new PIXI.Text("This is the womp womp");
