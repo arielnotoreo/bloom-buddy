@@ -5,77 +5,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloom Buddy</title>
+
+    <style>
+       .bgImg {
+        background-image: url('temp1.jpg');
+        background-color: pink;
+       }
+    </style>
+
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dekko&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 </head>
 <wrapper>
-<header>
-    <h1>Welcome to </h1> <img src="temp/heading.png" alt="">
 
-</header>
+    <div class="bgImg">
 
-<body>
-    <nav>
-            <a href="#guides">Guides</a>
-            <a href="#about">About</a>
-            <a href="#news">Bloom a Buddy</a>
+        <div id="container">
+            <nav>
+                <a href="index.html">Guides</a>
+                <a href="about.html">About</a>
+                <a href="game.html">Bloom a Buddy</a>
+            </nav>
+            <header>
+                <h1>Welcome to </h1> <img src="temp/heading.png" alt="">
+                <a href="#contentHeader">Click here to see the content below.</a>
+            </header>
           
-    </nav>
-    <main>
-        <h2>Growing Guides:</h1>
-        <!-- //for search bar and filter -->
-        <div id="filters">
-            <select name="filters" id="dropdown">
-                <option value="">Filters</option>
-                <hr />
-                <!-- Low (>3)
+        </div>
+
+
+    </div>
+
+    <body>
+
+        <main>
+            <div id="contentHeader">
+                <h2>Growing Guides:</h2>
+            </div>
+            <!-- //for search bar and filter -->
+            <div id="filters">
+                <select name="filters" id="dropdown">
+                    <option value="">Filters</option>
+                    <hr />
+                    <!-- Low (>3)
                 Medium (4-6)
                 High (7-10) -->
-                <optgroup label="Light Level (1-10)">
-                    <option value="lowLight">Low</option>
-                    <option value="medLight">Medium</option>
-                    <option value="highLight">High</option>
-                </optgroup>
-                <hr />
-                <optgroup label="Days to Harvest">
-                    <option value="shortHarvest">Less than 30</option>
-                    <option value="longHarvest">More than 30</option>
-                </optgroup>
-                <hr />
-                <optgroup label="Growth Rate">
-                    <option value="fastGrowth">Fast</option>
-                    <option value="slowGrowth">Slow</option>
-                </optgroup>
-                <hr />
-                <!-- distributions lowk might b hard its a world standard and paginated?  -->
-                <optgroup label="Native To">
-                    <option value="usa">USA</option>
-                    <option value="canada">Canada</option>
-                    <option value="europe">Europe</option>
-                    <option value="asia">Asia</option>
-                    <option value="africa">Africa</option>
-                </optgroup>
-            </select>
-            <input type="text" placeholder="Search for Plants...">
-        </div>
-        <!-- //for plants to be populated -->
-        <div id="content">
+                    <optgroup label="Light Level (1-10)">
+                        <option value="lowLight">Low</option>
+                        <option value="medLight">Medium</option>
+                        <option value="highLight">High</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="Days to Harvest">
+                        <option value="shortHarvest">Less than 30</option>
+                        <option value="longHarvest">More than 30</option>
+                    </optgroup>
+                    <hr />
+                    <optgroup label="Growth Rate">
+                        <option value="fastGrowth">Fast</option>
+                        <option value="slowGrowth">Slow</option>
+                    </optgroup>
+                    <hr />
+                    <!-- distributions lowk might b hard its a world standard and paginated?  -->
+                    <optgroup label="Native To">
+                        <option value="usa">USA</option>
+                        <option value="canada">Canada</option>
+                        <option value="europe">Europe</option>
+                        <option value="asia">Asia</option>
+                        <option value="africa">Africa</option>
+                    </optgroup>
+                </select>
+                <input type="text" placeholder="Search for Plants...">
+            </div>
+            <!-- //for plants to be populated -->
+            <div id="content">
+                <p>content</p>
+            </div>
+            <!-- //to navigate pages -->
+            <div id="pageBtns">
+                <button type="button">previous page</button>
+                <button type="button">next page</button>
 
-        </div>
-        <!-- //to navigate pages -->
-        <div id="pageBtns">
-            <button type="button">back!</button>
-            <button type="button">forward!</button>
-
-        </div>
-    </main>
-</body>
+            </div>
+        </main>
+    </body>
 
 
-<footer>
-    <p>Made by Leah, Ariel, Kenzie, Katie</p>
-</footer>
+    <footer>
+        <p>Feature Image by upklyak on Freepik</p>
+        <p>Website created by Leah, Ariel, Kenzie, and Katie</p>
+    </footer>
 </wrapper>
+
 </html>

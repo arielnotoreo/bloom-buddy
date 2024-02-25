@@ -1,53 +1,22 @@
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+
+#game{
+    margin: auto;
+    border: 3px solid green;
+    padding: 10px;
 }
 
 
-wrapper {
-    color: #3b3333;
+wrapper{
+color: #3b3333;
 }
 
-wrapper,
-footer,
+wrapper, footer,
 select,
 input,
 button {
     font-family: "Dekko", cursive;
     font-weight: 400;
     font-style: normal;
-
-}
-
-.bgImg {
-    /* The image used */
-   
-    position: relative;
-    text-align: left;
-    
-    min-height: 60vh;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    /* Needed to position the navbar */
-    position: relative;
-}
-
-#container {
-
-    position: relative;
-    text-align: center;
-    color: rgb(255, 255, 255);
-}
-
-#container image {
-    position: relative;
-
-    width: 600px;
-    height: 10px;
 }
 
 h1 {
@@ -63,7 +32,7 @@ input {
     border-radius: 25px;
     width: 40vw;
     height: 4vh;
-    font-size: 1em;
+    font-size: 3vh;
 }
 
 
@@ -105,90 +74,69 @@ button:active {
         font-size: 14px;
         padding: 0 25px;
     }
-
-    #pageBtns button {
+    #pageBtns button{
         width: 10%;
     }
 }
-
 header {
     display: flex;
-    flex-wrap: wrap;
-    border-radius: 25px;
-    height: 200px;
-    width: 40vw;
-    color: white;
-    background: rgba(193, 56, 56, 0.5);
-
-}
-
-#contentHeader {
-    border-bottom: dotted brown;
-}
-
-#content {
-    background-color: #db87c5;
 }
 
 /* Add a black background color to the top navigation */
 nav {
-    background-color: #fbeee0;
+    background-color: #8ABD91;
     overflow: hidden;
     height: 7vh;
-}
-
-
-/* Style the links inside the navigation bar */
+  }
+  
+  /* Style the links inside the navigation bar */
 nav a {
     float: left;
-    color: #3b3333;
+    color: #fbeee0;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 2em;
-}
-
-/* Change the color of links on hover */
+  }
+  
+  /* Change the color of links on hover */
 nav a:hover {
-    background-color: #deefff;
+    background-color: #fbeee0;
     color: #3b3333;
-}
+  }
 
-nav image {
-    width: 20px;
-}
 
-header img {
-    width: 200px;
-}
-
-#contentHeader {
-    font-size: 100px;
-    text-align: center;
-}
-
-#pageBtns button {
+#pageBtns button{
     width: 20vw;
+    
 }
 
-#pageBtns,
-#filters {
+#pageBtns, #filters{
     display: flex;
     justify-content: space-evenly;
     margin: auto;
+    border: 3px solid green;
     padding: 10px 0;
 }
 
 body {
-    padding: 0%;
-    box-sizing: border-box;
-    background-color: #70a589;
+  padding: 30px;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  box-sizing: border-box;
 }
 
 
 
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 select {
     background-color: #fbeee0;
 }
 
+select option:hover {
+    background-color: #ffcc00; /* Change this to the desired hover color */
+    color: #3b3333; /* Change this to the desired text color on hover */
+}
