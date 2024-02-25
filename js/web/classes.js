@@ -121,13 +121,13 @@ class Plant
 
         // INFO2 CODE
         let info2String = "";
-        info1String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
-        info1String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
-        info1String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
-        info1String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
-        info1String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
-        info1String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
-        info1String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
+        info2String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
+        info2String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
+        info2String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
+        info2String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
+        info2String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
+        info2String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
+        info2String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
 
         // FOOTER CODE
 
@@ -166,7 +166,7 @@ class Plant
         doc.body.appendChild(names);
         doc.body.appendChild(info1);
         doc.body.appendChild(info2);
-        
+
         return doc.URL;
     }
 }
