@@ -28,6 +28,7 @@ const sceneHeight = app.view.height;
 app.loader.add('images/test-light-sprite.png');
 app.loader.add('images/test-plant-sprite.png');
 app.loader.add('images/test-water-sprite.png');
+app.loader.add('images/test-turn-sprite.png');
 app.loader.onProgress.add(e => { console.log(`progress=${e.progress}`)});
 app.loader.onComplete.add(setup);
 app.loader.load();
@@ -38,9 +39,13 @@ let mainMenuScreen;
 let tutorialScreen;
 let gameScreen;
 let gameOverScreen;
+
+
+// sprites
 let plantSprite;
 let lightSprite;
 let waterSprite;
+let turnSprite;
 
 // plant tracker variables
 
@@ -60,6 +65,7 @@ function loadSprites() {
     plantSprite = PIXI.Texture.from('images/test-plant-sprite.png');
     lightSprite = PIXI.Texture.from('images/test-light-sprite.png');
     waterSprite = PIXI.Texture.from('images/test-water-sprite.png');
+    turnSprite = PIXI.Texture.from('images/test-turn-sprite.png');
 }
 
 /*
@@ -175,6 +181,7 @@ purpose: populates game objects into game scene
 worked on by: McKenzie Lam*/
 
 function fillGameScene() {
+    //#region GAME BUTTONS
     // create the game buttons
 
     // water button
@@ -185,7 +192,7 @@ function fillGameScene() {
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
-    waterButton.on("pointerup", clicked);
+    //waterButton.on("pointerup", clicked);
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -198,34 +205,56 @@ function fillGameScene() {
     lightButton.y = sceneHeight - 150;
     lightButton.interactive = true;
     lightButton.buttonMode = true;
-    lightButton.on("pointerup", clicked);
+    //lightButton.on("pointerup", clicked);
     lightButton.on('pointerover', e => e.target.alpha = 0.7);
     lightButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(lightButton);
 
     // turn button
-    let turnButton = new PIXI.Sprite(waterSprite);
+    let turnButton = new PIXI.Sprite(turnSprite);
     turnButton.width = 100;
     turnButton.height = 100;
     turnButton.x = 550;
     turnButton.y = sceneHeight - 150;
     turnButton.interactive = true;
     turnButton.buttonMode = true;
-    turnButton.on("pointerup", clicked);
+    //turnButton.on("pointerup", clicked);
     turnButton.on('pointerover', e => e.target.alpha = 0.7);
     turnButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(turnButton);
+    //#endregion
 
-    // temp label
+    //#region TEMP LABELS
     let waterLabel = new PIXI.Text("Water");
     waterLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
         fontFamily: 'Arial'
     })
-    waterLabel.x = sceneWidth/2 - 200;
+    waterLabel.x = 150;
     waterLabel.y = sceneHeight - 100;
     gameScreen.addChild(waterLabel);
+
+    let lightLabel = new PIXI.Text("Light");
+    lightLabel.style = new PIXI.TextStyle({
+        fill: 0xffffff,
+        fontSize: 24,
+        fontFamily: 'Arial'
+    })
+    lightLabel.x = 350;
+    lightLabel.y = sceneHeight - 100;
+    gameScreen.addChild(lightLabel);
+
+    let turnLabel = new PIXI.Text("Turn");
+    turnLabel.style = new PIXI.TextStyle({
+        fill: 0xffffff,
+        fontSize: 24,
+        fontFamily: 'Arial'
+    })
+    turnLabel.x = 550;
+    turnLabel.y = sceneHeight - 100;
+    gameScreen.addChild(turnLabel);
+    //#endregion
 
     // create the plant
     let plant = new Plant(plantSprite, 100, 100);
@@ -235,22 +264,6 @@ function fillGameScene() {
     // begin the game
     //gameLoop();
 }
-
-// MOVE THESE METHODS LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-function clicked() {
-    numClicks++;
-    /*
-    if (numClicks == 1)
-    {
-        isWatered = true;
-    }
-    else {
-        isWatered = false;
-    } */
-}
-
-// ----------------------------------------------------
 
 function fillGameOverScene() {
     let text = new PIXI.Text("This is the womp womp");
