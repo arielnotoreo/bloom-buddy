@@ -103,7 +103,7 @@ function plantLoaded(e, index)
     let content = document.querySelector("#content");
     content.appendChild(card);
 
-    document.querySelector("#moreBtn").onclick = function moreClick(plantCard)
+    document.querySelector("#moreBtn").onclick = function moreClick()
     {
         let old = this.parentNode.parentNode.parentNode;
         let content = document.querySelector("#content");
