@@ -66,10 +66,10 @@ class Plant
         let wrap = document.createElement("div");
         
         // CREATE ELEMENTS ----------------------------------------
-        let image = wrap.createElement("div");
-        let names = wrap.createElement("div");
-        let info1 = wrap.createElement("div");
-        let info2 = wrap.createElement("div");
+        let image = document.createElement("div");
+        let names = document.createElement("div");
+        let info1 = document.createElement("div");
+        let info2 = document.createElement("div");
 
         //#region  CREATE INFO --------------------------------------------
 
