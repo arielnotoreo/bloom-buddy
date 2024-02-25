@@ -158,6 +158,12 @@ function fillGameScene() {
 //#endregion
 
 //#region State Switch Methods
+
+/*
+function name: goTutorial
+purpose: transitions to the tutorial scene
+worked on by: McKenzie Lam
+*/
 function goTutorial() {
     tutorialScreen.visible = true;
     gameScreen.visible = false;
@@ -166,6 +172,11 @@ function goTutorial() {
     fillTutorialScene();
 }
 
+/*
+function name: goGame
+purpose: transitions to the game scene
+worked on by: McKenzie Lam
+*/
 function goGame() {
     tutorialScreen.visible = false;
     gameScreen.visible = true;
