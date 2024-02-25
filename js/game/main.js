@@ -47,8 +47,14 @@ let gameScreen;
 let gameOverScreen;
 let environmentScreen;
 
+//tracker variables
+let waterButtonClicked = false;
+let lightButtonClicked = false;
+let rotationButtonClicked = false;
+
 // sprites
-let plantSprite;
+let cactusSprite;
+let primroseSprite;
 let lightSprite;
 let waterSprite;
 let turnSprite;
@@ -59,6 +65,7 @@ let instructions;
 
 // plant tracker variables
 let plant;
+
 let numClicks = 0;
 let isWatered = false;
 
@@ -66,13 +73,14 @@ let isWatered = false;
 let genericButtonStyle = new PIXI.TextStyle({
     fill: 0x3b3333,
     fontSize: 48,
-    fontFamily: 'Comic Sans MS'
+    fontFamily: 'Dekko'
 });
 
 // FUNCTIONS -------------------------------------------------------------
 
 function loadSprites() {
-    plantSprite = PIXI.Texture.from('images/test-cactus.png');
+    cactusSprite = PIXI.Texture.from('images/test-cactus.png');
+    primroseSprite = PIXI.Texture.from('images/primrose_healthy.png');
     lightSprite = PIXI.Texture.from('images/lamp.png');
     waterSprite = PIXI.Texture.from('images/wateringcan.png');
     turnSprite = PIXI.Texture.from('images/turn.png');
@@ -127,13 +135,32 @@ function fillMainMenuScene() {
     gameTitle.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 96,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
 
     // position title and print to screen
     gameTitle.x = sceneWidth / 2 - gameTitle.width/2;
     gameTitle.y = 120;
     mainMenuScreen.addChild(gameTitle);
+
+    // print plants to screen
+    let cactus = new PIXI.Sprite(cactusSprite);
+    cactus.width = 1640 / 5;
+    cactus.height = 2360 / 5;
+    cactus.x = sceneWidth - cactus.width;
+    cactus.y = sceneHeight - cactus.height +100;
+    cactus.interactive = false;
+    cactus.buttonMode = false;
+    mainMenuScreen.addChild(cactus);
+
+    let primrose = new PIXI.Sprite(primroseSprite);
+    primrose.width = 1640 / 5;
+    primrose.height = 2360 / 5;
+    primrose.x = primrose.width / 5 -100;
+    primrose.y = sceneHeight - primrose.height +85;
+    primrose.interactive = false;
+    primrose.buttonMode = false;
+    mainMenuScreen.addChild(primrose);
 
     // create game buttons
     let startButton = new PIXI.Text("Start Game");
@@ -172,14 +199,14 @@ function fillTutorialScene() {
     // display the text
     let info = [
         "Water your plant by clicking \nthe watering can", 
-        "Give your plant light by \nclicking the lamp", 
+        "Give or take away light from \nyour plant by clicking the lamp.", 
         "Turn your plant so it gets \nan even amount of light"]
     
     let title = new PIXI.Text("Instructions");
     title.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 40,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
     title.x = sceneWidth / 2 - title.width/2;
     title.y = 50;
@@ -190,9 +217,9 @@ function fillTutorialScene() {
     instructions.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 40,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
-    instructions.x = sceneWidth / 2 - instructions.width/2;
+    instructions.x = sceneWidth / 2 - instructions.width/2 - 25;
     instructions.y = 120;
     tutorialScreen.addChild(instructions);
 
@@ -200,7 +227,7 @@ function fillTutorialScene() {
     let nextButton = new PIXI.Text("--->", {
         fill: 0x3b3333,
         fontSize: 24,
-        fontFamily: "Arial"
+        fontFamily: "Dekko"
       });
     nextButton.width = 50;
     nextButton.height = 50;
@@ -275,7 +302,8 @@ function fillGameScene() {
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
-    waterButton.on("pointerdown", function(){watterButtonClicked = true;});
+    //waterButton.on("pointerdown", function(){watterButtonClicked = true;});
+    //waterButton.on("pointerdown", function(){console.log("water clicked"); watterButtonClicked = true;});
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -288,7 +316,7 @@ function fillGameScene() {
     lightButton.y = sceneHeight - 150;
     lightButton.interactive = true;
     lightButton.buttonMode = true;
-    //lightButton.on("pointerup", clicked);
+    //lightButton.on("pointerdown", lightButtonClicked = true);
     lightButton.on('pointerover', e => e.target.alpha = 0.7);
     lightButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(lightButton);
@@ -301,7 +329,7 @@ function fillGameScene() {
     turnButton.y = sceneHeight - 150;
     turnButton.interactive = true;
     turnButton.buttonMode = true;
-    //turnButton.on("pointerup", clicked);
+    //turnButton.on("pointerdown", rotationButtonClicked = true);
     turnButton.on('pointerover', e => e.target.alpha = 0.7);
     turnButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(turnButton);
@@ -312,7 +340,7 @@ function fillGameScene() {
     waterLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     })
     waterLabel.x = 150;
     waterLabel.y = sceneHeight - 50;
@@ -322,7 +350,7 @@ function fillGameScene() {
     lightLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     })
     lightLabel.x = 350;
     lightLabel.y = sceneHeight - 50;
@@ -332,7 +360,7 @@ function fillGameScene() {
     turnLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     })
     turnLabel.x = 550;
     turnLabel.y = sceneHeight - 50;
@@ -340,20 +368,25 @@ function fillGameScene() {
     //#endregion
 
     // temp plant
-    let tempPlantTexture = PIXI.Texture.from('images/cactus_healthy.png');
-    let tempPlant = new PIXI.Sprite(tempPlantTexture);
-    tempPlant.x = sceneWidth / 2 - tempPlant.texture.width/2;
-    tempPlant.y = 200;
-    gameScreen.add(tempPlant); 
+    let tempPlant = new PIXI.Sprite(primroseSprite);
+    tempPlant.width = 1640 / 5;
+    tempPlant.height = 2360 / 5;
+    tempPlant.x = sceneWidth / 2 - tempPlant.width / 5 - 100;
+    tempPlant.y = sceneHeight / 2 - 300;
+    tempPlant.interactive = false;
+    tempPlant.buttonMode = false;
+    gameScreen.addChild(tempPlant);
 
     // create the plant
     /*
     plant = new Plant(plantSprite, 100, 100);
+    let plant = new Plant(plantSprite, 100, 100, true);
     gameScreen.addChild(plant.container);
     plant.setPosition(sceneWidth / 2, 200); */
 
     // begin the game
     //gameLoop();
+    //gameLoop(plant);
 }
 
 function fillGameOverScene() {
@@ -361,7 +394,7 @@ function fillGameOverScene() {
     text.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 56,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
     text.x = 10;
     text.y = 10;
@@ -412,8 +445,11 @@ function goGameOver() {
 }
 //#endregion
 
-
-function gameLoop()
+/* Game loop function and helper methods that handles the win/lose conditions, and
+majority game logic.
+Worked on by Ariel Enzhu Cthwe
+*/
+function gameLoop(plant)
 {
     while (plant.alive == true)
     {
@@ -425,7 +461,6 @@ function gameLoop()
 function onNextButtonClick(text, scene) {
     // progress to the next line of text
     index++;
-
     // determine if there are more lines
     if (index < text.length) {
     
@@ -437,5 +472,134 @@ function onNextButtonClick(text, scene) {
       index = 0;
       text = null;
       scene();
+      /*
+    if (plant.isIndoor)
+    {
+        let waterTracker = new WaterTracker(3, 6);
+        let lightTracker = new LightTracker(2, 4);
+        let rotationTracker = new RotationTracker(4, 6);
+
+        while (plant.alive == true)
+        {
+            //day cycle
+            DayCycle(0);
+
+            WaterTracker(waterTracker);
+            LightTracker(lightTracker);
+            RotationTracker(rotationTracker);
+        }
     }
+    else if (!plant.isIndoor)
+    {
+        let waterTracker = new WaterTracker(1, 3);
+        let lightTracker = new LightTracker(3, 2);
+        let rotationTracker = new RotationTracker(2, 6);
+
+        while (plant.alive == true)
+        {
+            //day cycle
+            DayCycle(0);
+    
+            WaterTracker(waterTracker);
+            LightTracker(lightTracker);
+            RotationTracker(rotationTracker);   
+        }
+    } */
+}
+
+//keeps track of the day counting and screen
+function DayCycle(dayCounter)
+{
+    //this part can be subject to move to the main js file depending on how shit goes
+    if (dayCounter % 2 == 0)
+    {
+        //display daytime screen
+    }
+    else if (dayCounter % 2 == 1)
+    {
+        //display nighttime screen
+    }
+
+    dayCounter++;
+
+    setTimeout(function(){DayCycle(dayCounter)}, 30000);
+}
+
+function WaterTracker(waterTracker)
+{
+    waterTracker.startTimer();
+
+    if (waterButtonClicked)
+    {
+        waterTracker.daysSince = 0;
+        waterTracker.count++;       
+    }
+    else
+    {
+        waterTracker.daysSince++;
+    }
+    
+    if (waterTracker.isLimitReached)
+    {
+        plant.alive = false;
+    }
+    else
+    {
+        waterTracker.count = 0;
+    }
+
+    waterTracker.resetTimer();
+}
+
+function LightTracker(lightTracker)
+{
+    lightTracker.startTimer();
+
+    if (lightButtonClicked)
+    {
+        lightTracker.daysSince = 0;
+        lightTracker.count++;
+    }
+    else
+    {
+        lightTracker.daysSince++;
+    }
+
+    if (lightTracker.isLimitReached)
+    {
+        plant.alive = false;
+    }
+    else
+    {
+        lightTracker.count = 0;
+    }
+
+    lightTracker.resetTimer();
+}
+
+function RotationTracker(rotationTracker)
+{
+    rotationTracker.startTimer();
+
+    if (rotationButtonClicked)
+    {
+        rotationTracker.daysSince = 0;
+        rotationTrackerTracker.count++;
+    }
+    else
+    {
+        rotationTracker.daysSince++;
+    }
+
+    if (rotationTracker.isLimitReached)
+    {
+        plant.alive = false;
+    }
+    else
+    {
+        rotationTracker.count = 0;
+    }
+
+    rotationTracker.resetTimer();
+}
 }
