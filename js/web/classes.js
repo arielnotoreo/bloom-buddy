@@ -146,6 +146,10 @@ class Plant
         info2.classList.add("info2");
 
         // APPEND ELEMENTS (None?) --------------------------------
+        doc.body.appendChild(image);
+        doc.body.appendChild(names);
+        doc.body.appendChild(info1);
+        doc.body.appendChild(info2);
 
         return doc.URL;
     }
