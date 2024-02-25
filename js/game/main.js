@@ -1,7 +1,7 @@
 /*
 file name: main.js
 purpose: contains general logic for the game
-worked on by: McKenzie Lam
+worked on by: McKenzie Lam, Ariel Cthwe
 */
 
 "use strict";
@@ -39,7 +39,7 @@ let mainMenuScreen;
 let tutorialScreen;
 let gameScreen;
 let gameOverScreen;
-
+let environmentScreen;
 
 // sprites
 let plantSprite;
@@ -49,7 +49,6 @@ let turnSprite;
 
 // plant tracker variables
 let plant;
-
 let numClicks = 0;
 let isWatered = false;
 
@@ -87,6 +86,11 @@ function setup() {
     tutorialScreen.visible = false;
     stage.addChild(tutorialScreen);
 
+    // create the environment screen
+    environmentScreen = new PIXI.Container();
+    environmentScreen.visible = false;
+    stage.addChild(environmentScreen);
+
     // create the game screen
     gameScreen = new PIXI.Container();
     gameScreen.visible = false;
@@ -97,13 +101,13 @@ function setup() {
     gameOverScreen.visible = false;
     stage.addChild(gameOverScreen);
 
-    fillMainMenuScene();
     loadSprites();
+    fillMainMenuScene();
 } 
 
 /*
 function name: fillMainMenuScene
-purpose: populates the main menu scene with all game objects
+purpose: populates the main menu scene with all its game objects
 worked on by: McKenzie Lam
 */
 function fillMainMenuScene() {
@@ -151,15 +155,63 @@ worked on by: McKenzie Lam
 */
 function fillTutorialScene() {
     
-    let text = new PIXI.Text("This is the instructions");
-    text.style = new PIXI.TextStyle({
+    // draw the background of the tutorial
+    graphics.beginFill(0x000000, 1);
+    graphics.drawRect(50, 50, 700, 400);
+    graphics.endFill();
+    tutorialScreen.addChild(graphics);
+
+    graphics.beginFill(0xFFFFFF, 1);
+    graphics.drawRect(100, 100, 600, 300);
+    graphics.endFill();
+    tutorialScreen.addChild(graphics);
+
+    // display the text
+    let info = [
+        "Water your plant by clicking \nthe watering can", 
+        "Give your plant light by \nclicking the lamp", 
+        "Turn your plant so it gets \nan even amount of light",
+        "If you need tips on how to \ncare for your plant, \nclick the guide"]
+    
+    let title = new PIXI.Text("Instructions");
+    title.style = new PIXI.TextStyle({
         fill: 0xffffff,
-        fontSize: 56,
+        fontSize: 40,
         fontFamily: 'Arial'
     });
-    text.x = 10;
-    text.y = 10;
-    tutorialScreen.addChild(text);
+    title.x = sceneWidth / 2 - title.width/2;
+    title.y = 50;
+    tutorialScreen.addChild(title);
+
+    let index = 0;
+    let instructions = new PIXI.Text(info[index]);
+    instructions.style = new PIXI.TextStyle({
+        fill: 0x000000,
+        fontSize: 40,
+        fontFamily: 'Arial'
+    });
+    instructions.x = sceneWidth / 2 - instructions.width/2;
+    instructions.y = 120;
+    tutorialScreen.addChild(instructions);
+
+    // instructions button
+    let nextButton = new PIXI.Text("--->", {
+        fill: 0xffffff,
+        fontSize: 48,
+        fontFamily: "Arial"
+      });
+    nextButton.width = 100;
+    nextButton.height = 100;
+    nextButton.x = 150;
+    nextButton.y = sceneHeight - 150;
+    nextButton.interactive = true;
+    nextButton.buttonMode = true;
+    nextButton.on("pointerup", function() {
+        onNextButtonClick(info, goEnvironmentScene, index);
+      });
+    nextButton.on('pointerover', e => e.target.alpha = 0.7);
+    nextButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    tutorialScreen.addChild(nextButton);
 
     // create game buttons
     let gameButton = new PIXI.Text("Go To Game");
@@ -176,6 +228,34 @@ function fillTutorialScene() {
     tutorialScreen.addChild(gameButton);
 }
 
+function fillEnvironmentScene() {
+    let indoor = new PIXI.Text("Go To Game");
+    indoor.style = genericButtonStyle;
+    indoor.x = sceneWidth/2 - 50;
+    indoor.y = sceneHeight - 200;
+    indoor.interactive = true;
+    indoor.buttonMode = true;
+    indoor.on("pointerup", function() {
+        goGame();
+    });
+    indoor.on('pointerover', e => e.target.alpha = 0.7);
+    indoor.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    tutorialScreen.addChild(indoor);
+
+    let outdoor = new PIXI.Text("Go To Game");
+    outdoor.style = genericButtonStyle;
+    outdoor.x = sceneWidth/2 - 50;
+    outdoor.y = sceneHeight - 200;
+    outdoor.interactive = true;
+    outdoor.buttonMode = true;
+    outdoor.on("pointerup", function() {
+        goGame();
+    });
+    outdoor.on('pointerover', e => e.target.alpha = 0.7);
+    outdoor.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    tutorialScreen.addChild(outdoor);
+}
+
 /*
 function name: fillGameScene
 purpose: populates game objects into game scene
@@ -183,8 +263,6 @@ worked on by: McKenzie Lam*/
 
 function fillGameScene() {
     //#region GAME BUTTONS
-    // create the game buttons
-
     // water button
     let waterButton = new PIXI.Sprite(waterSprite);
     waterButton.width = 100;
@@ -294,6 +372,13 @@ function goTutorial() {
     fillTutorialScene();
 }
 
+function goEnvironment() {
+    environmentScreen.visible = true;
+    tutorialScreen = false;
+    app.renderer.backgroundColor = 0xFFFF00;
+    fillEnvironmentScene();
+}
+
 /*
 function name: goGame
 purpose: transitions to the game scene
@@ -318,100 +403,9 @@ function goGameOver() {
 
 function gameLoop()
 {
-    let waterButtonClicked = false;
-    let lightButtonClicked = false;
-    let rotationButtonClicked = false;
-
-    if (indoorPlant)
+    while (plant.alive == true)
     {
-        let waterTracker = new WaterTracker(3, 6);
-
-        while (plant.alive == true)
-        {
-            //day cycle
-            DayCycle(0);
-
-            WaterTracker(waterTracker);
-        }
-    }
-    else if (outdoorPlant)
-    {
-        let waterTracker = new WaterTracker(1, 3);
-
-        while (plant.alive == true)
-        {
-            //day cycle
-            DayCycle(0);
-    
-            
-    
-            plant.WaterTracker();
-            plant.IsAlive();
-        }
-    }
-}
-
-//keeps track of the day counting and screen
-function DayCycle(dayCounter)
-{
-    //this part can be subject to move to the main js file depending on how shit goes
-    if (dayCounter % 2 == 0)
-    {
-        //display daytime screen
-    }
-    else if (dayCounter % 2 == 1)
-    {
-        //display nighttime screen
-    }
-
-    dayCounter++;
-
-    setTimeout(function(){DayCycle(dayCounter)}, 30000);
-
-    //possibly figure out if we need a reset if game over
-
-    
-}
-
-function WaterTracker(waterTracker)
-{
-    waterTracker.startTimer();
-
-    if (waterButtonClicked)
-    {
-        waterTracker.daysSince = 0;
-        waterTracker.count++;       
-    }
-    else
-    {
-        waterTracker.daysSince++;
-    }
-    
-    if (waterTracker.isLimitReached)
-    {
-        plant.alive = false;
-    }
-    else
-    {
-        waterTracker.count = 0;
-    }
-
-    waterTracker.resetTimer();
-}
-
-function LightTracker(frequency, maxLimit)
-{
-    let lightTracker = new LightTracker(frequency, maxLimit);
-
-    lightTracker.startTimer();
-
-    if (watterButtonClicked)
-    {
-        lightTracker.count++;
-        lightTracker.resetTimer();
-    }
-    else
-    {
-        lightTracker.resetTimer();
+        plant.WaterTracker();
+        plant.IsAlive();
     }
 }
