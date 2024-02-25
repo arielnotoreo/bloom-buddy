@@ -35,6 +35,7 @@ let stage;
 let mainMenuScreen;
 let tutorialScreen;
 let gameScreen;
+let gameOverScreen;
 
 // create generic button style
 let genericButtonStyle = new PIXI.TextStyle({
@@ -67,6 +68,11 @@ function setup() {
     gameScreen = new PIXI.Container();
     gameScreen.visible = false;
     stage.addChild(gameScreen);
+
+    // create game over screen
+    gameOverScreen = new PIXI.Container();
+    gameOverScreen.visible = false;
+    stage.addChild(gameOverScreen);
 
     fillMainMenuScene();
 } 
@@ -153,7 +159,31 @@ purpose: populates game objects into game scene
 worked on by: McKenzie Lam
 */
 function fillGameScene() {
-    
+    // create game buttons
+    let gameButton = new PIXI.Text("LOSE");
+    gameButton.style = genericButtonStyle;
+    gameButton.x = sceneWidth/2 - 50;
+    gameButton.y = sceneHeight - 200;
+    gameButton.interactive = true;
+    gameButton.buttonMode = true;
+    gameButton.on("pointerup", function() {
+        goGameOver();
+    });
+    gameButton.on('pointerover', e => e.target.alpha = 0.7);
+    gameButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    gameScreen.addChild(gameButton);
+}
+
+function fillGameOverScene() {
+    let text = new PIXI.Text("This is the womp womp");
+    text.style = new PIXI.TextStyle({
+        fill: 0xffffff,
+        fontSize: 56,
+        fontFamily: 'Arial'
+    });
+    text.x = 10;
+    text.y = 10;
+    gameOverScreen.addChild(text);
 }
 //#endregion
 
@@ -183,5 +213,12 @@ function goGame() {
     mainMenuScreen.visible = false;
     app.renderer.backgroundColor = 0xFF0080;
     fillGameScene();
+}
+
+function goGameOver() {
+    gameOverScreen.visible = true;
+    gameScreen.visible = false;
+    app.renderer.backgroundColor = 0x00ff00;
+    fillGameOver();
 }
 //#endregion
