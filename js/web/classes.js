@@ -5,7 +5,7 @@ class Plant
     {
         let tempString = "";
         tempString += "<div class = 'cardSmall'>"
-        tempString += `<img src = "${this.image}" alt = "">`
+        tempString += `<img src = "${this.image}" alt = "" height = 100px>`
         tempString += `<h3>${this.commonName}</h3>`
         tempString += "</div>"
         tempString += "<div class = 'cardExpand' display = none>"
@@ -81,7 +81,7 @@ class Plant
 
         if (this.image) 
         {
-            imageString += `<img src="${this.image}" alt="">`;
+            imageString += `<img src="${this.image}" alt=""  height = 100px>`;
         }
 
         // NAMES CODE
