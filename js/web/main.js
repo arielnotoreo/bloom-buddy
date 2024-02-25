@@ -134,6 +134,9 @@ function prevPage()
 
 function load()
 {
+    let content = document.querySelector("#content");
+    content.innerHTML="";
+
     let url = PLANTAPI_URL + "/api/v1/plants?" + token + "&page=" + pageIndex;
     getSpecies(url);
 }
