@@ -22,22 +22,22 @@ button {
 
 /* unvisited link */
 a:link {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 /* visited link */
 a:visited {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 /* mouse over link */
 a:hover {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 /* selected link */
 a:active {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 
