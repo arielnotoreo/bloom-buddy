@@ -40,7 +40,7 @@ function speciesLoaded(e, index)
     }
 
     // still need to fill in constructor
-    // obj[i].whatever
+    // WHY IS IT NOT UPDATING
     for (let i = 0; i < 20; i++) 
     {
         let url = PLANTAPI_URL + obj[i].links.plant + "?" + token;
