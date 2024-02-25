@@ -154,7 +154,6 @@ function fillMainMenuScene() {
     primrose.y = sceneHeight - primrose.height +85;
     primrose.interactive = false;
     primrose.buttonMode = false;
-    primrose.visible = false;
     mainMenuScreen.addChild(primrose);
 
     // create game buttons
@@ -362,12 +361,14 @@ function fillGameScene() {
     //#endregion
 
     // temp plant
-    let tempPlantTexture = PIXI.Texture.from('images/cactus_healthy.png');
-    let tempPlant = new PIXI.Sprite(tempPlantTexture);
-    tempPlant.width = 200;
-    tempPlant.x = sceneWidth / 2 - tempPlant.texture.width/2;
-    tempPlant.y = 200;
-    gameScreen.addChild(tempPlant); 
+    let tempPlant = new PIXI.Sprite(primroseSprite);
+    tempPlant.width = 1640 / 5;
+    tempPlant.height = 2360 / 5;
+    tempPlant.x = sceneWidth / 2 - tempPlant.width / 5 - 100;
+    tempPlant.y = sceneHeight / 2 - 300;
+    tempPlant.interactive = false;
+    tempPlant.buttonMode = false;
+    gameScreen.addChild(tempPlant);
 
     // create the plant
     /*
