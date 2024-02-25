@@ -33,6 +33,7 @@ app.loader.add('images/primrose_dying.png');
 app.loader.add('images/primrose_healthy.png');
 app.loader.add('images/turn.png');
 app.loader.add('images/lamp.png');
+app.loader.add('images/test-cactus.png');
 app.loader.add('images/wateringcan.png');
 app.loader.onProgress.add(e => { console.log(`progress=${e.progress}`)});
 app.loader.onComplete.add(setup);
@@ -52,6 +53,10 @@ let lightSprite;
 let waterSprite;
 let turnSprite;
 
+// tutorial
+let index;
+let instructions;
+
 // plant tracker variables
 let plant;
 let numClicks = 0;
@@ -67,7 +72,7 @@ let genericButtonStyle = new PIXI.TextStyle({
 // FUNCTIONS -------------------------------------------------------------
 
 function loadSprites() {
-    plantSprite = PIXI.Texture.from('images/primrose_healthy.png');
+    plantSprite = PIXI.Texture.from('images/test-cactus.png');
     lightSprite = PIXI.Texture.from('images/lamp.png');
     waterSprite = PIXI.Texture.from('images/wateringcan.png');
     turnSprite = PIXI.Texture.from('images/turn.png');
@@ -143,13 +148,6 @@ function fillMainMenuScene() {
     startButton.on('pointerover', e => e.target.alpha = 0.7);
     startButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     mainMenuScreen.addChild(startButton);
-
-    /* maybe figure out new way to do buttons?
-    let startButton = new Button();
-    startButton.options.text = "Start";
-    startButton.options.width = 50;
-    startButton.options.height = 50;
-    */
 }
 
 //#region Fill Game Scene Methods
@@ -175,8 +173,7 @@ function fillTutorialScene() {
     let info = [
         "Water your plant by clicking \nthe watering can", 
         "Give your plant light by \nclicking the lamp", 
-        "Turn your plant so it gets \nan even amount of light",
-        "If you need tips on how to \ncare for your plant, \nclick the guide"]
+        "Turn your plant so it gets \nan even amount of light"]
     
     let title = new PIXI.Text("Instructions");
     title.style = new PIXI.TextStyle({
@@ -188,8 +185,8 @@ function fillTutorialScene() {
     title.y = 50;
     tutorialScreen.addChild(title);
 
-    let index = 0;
-    let instructions = new PIXI.Text(info[index]);
+    index = 0;
+    instructions = new PIXI.Text(info[index]);
     instructions.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 40,
@@ -201,24 +198,25 @@ function fillTutorialScene() {
 
     // instructions button
     let nextButton = new PIXI.Text("--->", {
-        fill: 0xffffff,
-        fontSize: 48,
+        fill: 0x3b3333,
+        fontSize: 24,
         fontFamily: "Arial"
       });
-    nextButton.width = 100;
-    nextButton.height = 100;
-    nextButton.x = 150;
-    nextButton.y = sceneHeight - 150;
+    nextButton.width = 50;
+    nextButton.height = 50;
+    nextButton.x = 570;
+    nextButton.y = 320;
     nextButton.interactive = true;
     nextButton.buttonMode = true;
     nextButton.on("pointerup", function() {
-        onNextButtonClick(info, goEnvironmentScene, index);
-      });
+        onNextButtonClick(info, goGame);
+    });
     nextButton.on('pointerover', e => e.target.alpha = 0.7);
     nextButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     tutorialScreen.addChild(nextButton);
 
-    // create game buttons
+    // instant 'go to game' button for testing
+    /*
     let gameButton = new PIXI.Text("Go To Game");
     gameButton.style = genericButtonStyle;
     gameButton.x = sceneWidth/2 - gameButton.width / 2;
@@ -231,12 +229,13 @@ function fillTutorialScene() {
     gameButton.on('pointerover', e => e.target.alpha = 0.7);
     gameButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     tutorialScreen.addChild(gameButton);
+    */
 }
 
 function fillEnvironmentScene() {
-    let indoor = new PIXI.Text("Go To Game");
+    let indoor = new PIXI.Text("Indoor");
     indoor.style = genericButtonStyle;
-    indoor.x = sceneWidth/2 - 50;
+    indoor.x = sceneWidth/2 - indoor.width / 2 - 50;
     indoor.y = sceneHeight - 200;
     indoor.interactive = true;
     indoor.buttonMode = true;
@@ -247,9 +246,9 @@ function fillEnvironmentScene() {
     indoor.on('pointerout', e => e.currentTarget.alpha = 1.0);
     tutorialScreen.addChild(indoor);
 
-    let outdoor = new PIXI.Text("Go To Game");
+    let outdoor = new PIXI.Text("Outdoor");
     outdoor.style = genericButtonStyle;
-    outdoor.x = sceneWidth/2 - 50;
+    outdoor.x = sceneWidth/2 - outdoor.width / 2 + 50;
     outdoor.y = sceneHeight - 200;
     outdoor.interactive = true;
     outdoor.buttonMode = true;
@@ -345,7 +344,7 @@ function fillGameScene() {
     let tempPlant = new PIXI.Sprite(tempPlantTexture);
     tempPlant.x = sceneWidth / 2 - tempPlant.texture.width/2;
     tempPlant.y = 200;
-    gameScreen.addChild(tempPlant);
+    gameScreen.add(tempPlant); 
 
     // create the plant
     /*
@@ -420,5 +419,23 @@ function gameLoop()
     {
         //plant.WaterTracker();
         //plant.IsAlive();
+    }
+}
+
+function onNextButtonClick(text, scene) {
+    // progress to the next line of text
+    index++;
+
+    // determine if there are more lines
+    if (index < text.length) {
+    
+        // update story text
+        instructions.text = text[index];
+    } else {
+      
+      // transition to the next screen
+      index = 0;
+      text = null;
+      scene();
     }
 }
