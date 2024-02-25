@@ -24,10 +24,11 @@ app.renderer.backgroundColor = 0x5e86f7;
 const sceneWidth = app.view.width;
 const sceneHeight = app.view.height;
 
-// load in assets -------------------------
-app.loader.add(`../images/test-light-sprite.png`);
-app.loader.add(`../images/test-plant-sprite.png`);
+// load in assets
+app.loader.add('images/test-light-sprite.png');
+app.loader.add('images/test-plant-sprite.png');
 app.loader.add('images/test-water-sprite.png');
+app.loader.onProgress.add(e => { console.log(`progress=${e.progress}`)});
 app.loader.onComplete.add(setup);
 app.loader.load();
 
@@ -39,6 +40,11 @@ let gameScreen;
 let gameOverScreen;
 let plantSprite;
 let lightSprite;
+let waterSprite;
+
+// plant tracker variables
+let numClicks = 0;
+let isWatered = false;
 
 // create generic button style
 let genericButtonStyle = new PIXI.TextStyle({
@@ -50,9 +56,9 @@ let genericButtonStyle = new PIXI.TextStyle({
 // FUNCTIONS -------------------------------------------------------------
 
 function loadSprites() {
-    plantSprite = new PIXI.Texture.from(images/test-plant-sprite.png);
-    
-    lightSprite = new PIXI.Texture.from(images/test-light-sprite.png);
+    plantSprite = PIXI.Texture.from('images/test-plant-sprite.png');
+    lightSprite = PIXI.Texture.from('images/test-light-sprite.png');
+    waterSprite = PIXI.Texture.from('images/test-water-sprite.png');
 }
 
 /*
@@ -84,6 +90,7 @@ function setup() {
     stage.addChild(gameOverScreen);
 
     fillMainMenuScene();
+    loadSprites();
 } 
 
 /*
@@ -165,8 +172,8 @@ function fillTutorialScene() {
 /*
 function name: fillGameScene
 purpose: populates game objects into game scene
-worked on by: McKenzie Lam
-*/
+worked on by: McKenzie Lam*/
+
 function fillGameScene() {
     // create game buttons
     /*
@@ -183,6 +190,7 @@ function fillGameScene() {
     gameButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(gameButton); */
 
+    /*
     let plant = new PIXI.Text("PLANT");
     plant.style = genericButtonStyle;
     plant.x = sceneWidth/2 - 50;
@@ -194,43 +202,68 @@ function fillGameScene() {
     });
     plant.on('pointerover', e => e.target.alpha = 0.7);
     plant.on('pointerout', e => e.currentTarget.alpha = 1.0);
-    gameScreen.addChild(plant);
+    gameScreen.addChild(plant); */
 
-    let mom = new Plant(plantSprite, 0, 3, 4, 2, 1);
-    
-    let waterSprite = PIXI.Texture.from('images/test-water-sprite.png');
     let waterButton = new PIXI.Sprite(waterSprite);
     waterButton.width = 100;
     waterButton.height = 100;
-    waterButton.x = sceneWidth/2 - 50;
-    waterButton.y = sceneHeight - 200;
+    waterButton.x = sceneWidth/2 - 200;
+    waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
     waterButton.on("pointerup", clicked);
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
-    
     gameScreen.addChild(waterButton);
 
+    let waterLabel = new PIXI.Text("Water");
+    waterLabel.style = new PIXI.TextStyle({
+        fill: 0xffffff,
+        fontSize: 24,
+        fontFamily: 'Arial'
+    })
+    waterLabel.x = sceneWidth/2 - 200;
+    waterLabel.y = sceneHeight - 100;
+    gameScreen.addChild(waterLabel);
+
+    let plant = new Plant(plantSprite, 0, 1, 2, 0, 0);
+
+    /*
+    let tempText = new PIXI.Text(numClicks);
+    tempText.style = new PIXI.TextStyle({
+        fill: 0xffffff,
+        fontSize: 56,
+        fontFamily: 'Arial'
+    });
+    tempText.x = 10;
+    tempText.y = 10;
+    gameScreen.addChild(tempText);
+
+    let boolText = new PIXI.Text(isWatered);
+    boolText.style = new PIXI.TextStyle({
+        fill: 0xffffff,
+        fontSize: 56,
+        fontFamily: 'Arial'
+    });
+    boolText.x = 40;
+    boolText.y = 40;
+    gameScreen.addChild(boolText);
+    */
 }
 
 // MOVE THESE METHODS LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!
-function onButtonDown() {
-    this.isdown = true;
-    this.sprite.tint = 0xff0000;
-}
 
-let numClicks = 0;
-let isWatered = false;
+
 function clicked() {
     numClicks++;
+    /*
     if (numClicks == 1)
     {
         isWatered = true;
     }
     else {
         isWatered = false;
-    }
+    } */
 }
 
 // ----------------------------------------------------
