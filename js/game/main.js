@@ -303,7 +303,7 @@ function fillGameScene() {
     waterButton.interactive = true;
     waterButton.buttonMode = true;
     //waterButton.on("pointerdown", function(){watterButtonClicked = true;});
-    waterButton.on("pointerdown", function(){console.log("water clicked"); watterButtonClicked = true;});
+    //waterButton.on("pointerdown", function(){console.log("water clicked"); watterButtonClicked = true;});
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -316,7 +316,7 @@ function fillGameScene() {
     lightButton.y = sceneHeight - 150;
     lightButton.interactive = true;
     lightButton.buttonMode = true;
-    lightButton.on("pointerdown", lightButtonClicked = true);
+    //lightButton.on("pointerdown", lightButtonClicked = true);
     lightButton.on('pointerover', e => e.target.alpha = 0.7);
     lightButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(lightButton);
@@ -329,7 +329,7 @@ function fillGameScene() {
     turnButton.y = sceneHeight - 150;
     turnButton.interactive = true;
     turnButton.buttonMode = true;
-    turnButton.on("pointerdown", rotationButtonClicked = true);
+    //turnButton.on("pointerdown", rotationButtonClicked = true);
     turnButton.on('pointerover', e => e.target.alpha = 0.7);
     turnButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(turnButton);
@@ -386,7 +386,7 @@ function fillGameScene() {
 
     // begin the game
     //gameLoop();
-    gameLoop(plant);
+    //gameLoop(plant);
 }
 
 function fillGameOverScene() {
@@ -472,6 +472,7 @@ function onNextButtonClick(text, scene) {
       index = 0;
       text = null;
       scene();
+      /*
     if (plant.isIndoor)
     {
         let waterTracker = new WaterTracker(3, 6);
@@ -503,7 +504,7 @@ function onNextButtonClick(text, scene) {
             LightTracker(lightTracker);
             RotationTracker(rotationTracker);   
         }
-    }
+    } */
 }
 
 //keeps track of the day counting and screen
