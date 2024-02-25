@@ -106,7 +106,7 @@ function plantLoaded(e, index)
     document.querySelector("#moreBtn").onclick = function moreClick()
     {
         let old = this.parentNode.parentNode.parentNode;
-        let content = this.parentNode.parentNode;
+        let content = this.parentNode.parentNode.parentNode.parentNode;
         content.replaceChild(plantCard.makePage(), old);
     };
 
