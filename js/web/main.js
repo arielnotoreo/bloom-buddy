@@ -103,13 +103,11 @@ function plantLoaded(e, index)
     let content = document.querySelector("#content");
     content.appendChild(card);
 
-    document.querySelector("#moreBtn").onclick = moreClick(plantCard);
+    document.querySelector("#moreBtn").onclick = function moreClick()
+    {
+        let old = this.parentNode.parentNode.parentNode;
+        let content = this.parentNode.parentNode.parentNode.parentNode;
+        content.replaceChild(plantCard.makePage(), old);
+    };
 
-}
-
-function moreClick(plantCard)
-{
-    let old = document.querySelector("#card");
-    let content = document.querySelector("#content");
-    content.replaceChild(plantCard.makePage(), old);
 }

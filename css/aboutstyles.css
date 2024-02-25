@@ -91,8 +91,7 @@ h1 {
 }
 
 header h1 {
-    font-size: 7vh;
-    margin: 0;
+    font-size: 5vh;
     animation-duration: 3s;
     animation-name: slidein1;
 }
@@ -159,9 +158,12 @@ header {
     display: flex;
     flex-wrap: wrap;
     border-radius: 25px;
-    height: 30vh;
-    width: 40vw;
+    position: absolute;
+    top:200px;
+    height: 10vh;
+    width: 50vw;
     margin: 12%;
+   
     padding-left: 20px;
     color: white;
     background: rgba(189, 201, 227, 0.908);
@@ -182,31 +184,9 @@ header {
     background-color: #fbeee0;
 }
 
-.cardsmall img {
-    border-radius: 50%;
-}
-
-#content .card {
-    font-size: 8pt;
-    padding: 10px;
-    width: 33vw;
-    height: 50vh;
-    background-color: white;
-}
-
-
-
-
-#filters {
-    border-bottom: dotted rgb(67, 52, 57);
-}
-
-
-
 header a {
     border-radius: 30px;
-    height: 4vh;
-    width: 10vw;
+    height: 3vh;
     margin: auto;
     background-color: #54856d;
 
@@ -265,6 +245,7 @@ header img {
     padding: 10px 0;
 }
 
+
 body {
     padding: 0%;
     box-sizing: border-box;
@@ -300,15 +281,14 @@ select {
     header {
         display: flex;
         flex-wrap: wrap;
+        margin: auto;
         border-radius: 25px;
         margin: 6%;
-        height: 35vh;
         padding-left: 20px;
     }
 
     header a {
         margin: 0;
-        width: 10vw;
         height: 5vh;
         background-color: #54856d;
 

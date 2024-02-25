@@ -5,13 +5,13 @@ class Plant
     {
         let tempString = "";
         tempString += "<div class = 'cardSmall'>"
-        tempString += `<img src = "${this.image}" alt = "">`
+        tempString += `<img src = "${this.image}" alt = "" height = 100px>`
         tempString += `<h3>${this.commonName}</h3>`
         tempString += "</div>"
         tempString += "<div class = 'cardExpand' display = none>"
         tempString += "<div class = 'expandLeft'>"
         tempString += `<h4>${this.scientificName}</h4>`
-        tempString += `<p>${this.description}</p>`
+        tempString += `<p>${this.familyName}</p>`
         tempString += "</div>"
         tempString += "<div class = 'expandRight'>" 
         tempString += `<p>Duration: ${this.duration}</p>`
@@ -73,15 +73,12 @@ class Plant
 
         //#region  CREATE INFO --------------------------------------------
 
-        // HEADER CODE
-        // NAVBAR CODE
-
         // IMAGE CODE
         let imageString = "";
 
         if (this.image) 
         {
-            imageString += `<img src="${this.image}" alt="">`;
+            imageString += `<img src="${this.image}" alt=""  height = 100px border-radius = 50%>`;
         }
 
         // NAMES CODE
@@ -128,8 +125,6 @@ class Plant
         info2String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
         info2String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
         info2String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
-
-        // FOOTER CODE
 
         //#endregion
 
