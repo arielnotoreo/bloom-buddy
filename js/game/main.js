@@ -449,7 +449,6 @@ function gameLoop()
 function onNextButtonClick(text, scene) {
     // progress to the next line of text
     index++;
-
     // determine if there are more lines
     if (index < text.length) {
     
