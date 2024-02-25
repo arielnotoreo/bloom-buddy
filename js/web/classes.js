@@ -146,6 +146,22 @@ class Plant
         info2.classList.add("info2");
 
         // APPEND ELEMENTS (None?) --------------------------------
+        doc.head.innerHTML = ` <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>${this.commonName}</title>
+    
+        <style>
+           .bgImg {
+            background-image: url('temp1.jpg');
+            background-color: pink;
+           }
+        </style>
+    
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Dekko&family=Nanum+Pen+Script&display=swap" rel="stylesheet">`
+        
         doc.body.appendChild(image);
         doc.body.appendChild(names);
         doc.body.appendChild(info1);
