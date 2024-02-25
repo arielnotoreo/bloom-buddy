@@ -41,9 +41,9 @@ function speciesLoaded(e, index)
 
     // still need to fill in constructor
     // obj[i].whatever
-    for (let i = 0; i < 30; i++) 
+    for (let i = 0; i < 20; i++) 
     {
-        let url = PLANTAPI_URL + obj.links.plant + "?" + token;
+        let url = PLANTAPI_URL + obj[i].links.plant + "?" + token;
         getPlant(url)
     }
 }
