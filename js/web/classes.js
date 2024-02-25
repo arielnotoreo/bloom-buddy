@@ -62,14 +62,14 @@ class Plant
 
     makePage()
     {
-        // Make the new webpage
-        let doc = document.implementation.createHTMLDocument(this.commonName);
+        // Make the new container
+        let wrap = document.createElement("div");
         
         // CREATE ELEMENTS ----------------------------------------
-        let image = doc.createElement("div");
-        let names = doc.createElement("div");
-        let info1 = doc.createElement("div");
-        let info2 = doc.createElement("div");
+        let image = wrap.createElement("div");
+        let names = wrap.createElement("div");
+        let info1 = wrap.createElement("div");
+        let info2 = wrap.createElement("div");
 
         //#region  CREATE INFO --------------------------------------------
 
@@ -144,29 +144,14 @@ class Plant
         names.classList.add("names");
         info1.classList.add("info1");
         info2.classList.add("info2");
+        wrap.classList.add("card");
 
         // APPEND ELEMENTS (None?) --------------------------------
-        doc.head.innerHTML = ` <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${this.commonName}</title>
-    
-        <style>
-           .bgImg {
-            background-image: url('temp1.jpg');
-            background-color: pink;
-           }
-        </style>
-    
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Dekko&family=Nanum+Pen+Script&display=swap" rel="stylesheet">`
-        
-        doc.body.appendChild(image);
-        doc.body.appendChild(names);
-        doc.body.appendChild(info1);
-        doc.body.appendChild(info2);
+        wrap.appendChild(image);
+        wrap.appendChild(names);
+        wrap.appendChild(info1);
+        wrap.appendChild(info2);
 
-        return doc.URL;
+        return wrap;
     }
 }
