@@ -22,25 +22,42 @@ button {
 
 /* unvisited link */
 a:link {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 /* visited link */
 a:visited {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 /* mouse over link */
 a:hover {
-    color: #3b3333;
+    color: #fbeee0;
 }
 
 /* selected link */
 a:active {
+    color: #fbeee0;
+}
+
+nav> a:link {
     color: #3b3333;
 }
 
+/* visited link */
+nav> a:visited {
+    color: #3b3333;
+}
 
+/* mouse over link */
+nav >a:hover {
+    color: #3b3333;
+}
+
+/* selected link */
+nav >a:active {
+    color: #3b3333;
+}
 
 .bgImg {
     /* The image used */
@@ -213,6 +230,7 @@ header a {
 }
 
 /* Add a black background color to the top navigation */
+/* Add a black background color to the top navigation */
 nav {
     animation-duration: 3s;
     animation-name: slidein;
@@ -236,7 +254,6 @@ nav a {
 nav a:hover {
     background-color: #deefff;
     color: #54856d;
-    ;
 }
 
 nav image {
