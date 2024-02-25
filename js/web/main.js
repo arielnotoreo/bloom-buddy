@@ -9,7 +9,7 @@ let pageIndex = 1;
 // Execute when the window has loaded
 window.onload = function(e) 
 {
-    let url = PLANTAPI_URL + "/api/v1/plants/search?" + token + "&page=" + pageIndex;
+    let url = PLANTAPI_URL + "/api/v1/plants?" + token + "&page=" + pageIndex;
     getSpecies(url);
 }
 
@@ -74,7 +74,39 @@ function plantLoaded(e, index)
         return;
     }
 
-    // still need to fill in constructor
-    // obj[i].whatever
-    let plantCard = new Plant();
+    let plantCard = new Plant(
+        obj.common_name, 
+        obj.scientific_name,
+        obj.image_url,
+        obj.family_common_name,
+        obj.main_species.duration,
+        obj.growth.description,
+        obj.main_species.edible,
+        obj.main_species.edible_part,
+        obj.specifications.average_height.cm,
+        obj.growth.days_to_harvest,
+        obj.growth.sowing,
+        obj.growth.light,
+        obj.growth.atmospheric_humidity,
+        obj.growth.minimum_temperature.deg_c,
+        obj.growth.maximum_temperature.deg_c,
+        obj.growth.spread.cm,
+        obj.growth.minimum_precipitation.mm,
+        obj.growth.maximum_precipitation.mm,
+        obj.growth.soil_nutriements,
+        obj.main_species.distribution.native
+        );
+    let card = document.createElement("div");
+    card.innerHTML = plantCard.card;
+    card.classList.add("card");
+    document.querySelector("#moreBtn").onclick = moreClick(plantCard);
+
+    let content = document.querySelector("#content");
+    content.appendChild(card);
+
+}
+
+function moreClick(plantCard)
+{
+    window.location.href = plantCard.makePage();
 }

@@ -1,8 +1,8 @@
 class Plant
 {
     constructor(commonName, scientificName, image, familyName, duration, description, 
-        edible, ediblePart, height, growTime, sowing, light, humidity, temp, spread, 
-        precipitation, soil, nativeLocation, introducedLocation)
+        edible, ediblePart, height, growTime, sowing, light, humidity, minTemp, maxTemp, spread, 
+        minPrecipitation, maxPrecipitation, soil, nativeLocation)
     {
         this.commonName = commonName;
         this.scientificName = scientificName;
@@ -24,12 +24,15 @@ class Plant
         this.sowing = sowing;
         this.light = light;
         this.humidity = humidity;
-        this.temp = temp;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
         this.spread = spread;
-        this.precipitation = precipitation;
+        this.minPrecipitation = minPrecipitation;
+        this.maxPrecipitation = maxPrecipitation;
         this.soil = soil;
         this.nativeLocation = nativeLocation;
-        this.introducedLocation = introducedLocation;
+        this.card;
+        makeCard();
     }
 
     makePage()
@@ -90,24 +93,14 @@ class Plant
             }
             info1String += `</p>`;
         }
-        info1String += `<p class = 'details'><strong>Introduced Locations</strong>: ${this.introducedLocation}</p>`;
-        {
-            let count = this.introducedLocation.count;
-            info1String += `${this.introducedLocation[0]}`;
-            for (let i = 1; i < count; i++) 
-            {
-                info1String += `, ${this.introducedLocation[i]}`;
-            }
-            info1String += `</p>`;
-        }
 
         // INFO2 CODE
         let info2String = "";
         info1String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
         info1String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
-        info1String += `<p class = 'details'><strong>Temperature</strong>: ${this.temp}</p>`;
+        info1String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
         info1String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
-        info1String += `<p class = 'details'><strong>Precipitation</strong>: ${this.precipitation}</p>`;
+        info1String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
         info1String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
         info1String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
 
@@ -129,6 +122,31 @@ class Plant
 
         // APPEND ELEMENTS (None?) --------------------------------
 
-        //idk if redirect would go here, another method, or somewhere else entirely
+        return doc.URL;
+    }
+
+    makeCard()
+    {
+        let tempString = "";
+        tempString += "<div class = 'cardSmall'>"
+        tempString += `<img src = "${this.image}" alt = "">`
+        tempString += `<h3>${this.commonName}</h3>`
+        tempString += "</div>"
+        tempString += "<div class = 'cardExpand' display = none>"
+        tempString += "<div class = 'expandLeft'>"
+        tempString += `<h4>${this.scientificName}</h4>`
+        tempString += `<p>${this.description}</p>`
+        tempString += "</div>"
+        tempString += "<div class = 'expandRight'>" 
+        tempString += `<p>Duration: ${this.duration}</p>`
+        tempString += `<p>Light: ${this.light}</p>`
+        tempString += `<p>Humidity: ${this.humidity}</p>`
+        tempString += `<p>Temperature: ${this.minTemp}-${this.maxTemp}</p>`
+        tempString += `<p>Native Location(s): ${this.nativeLocation}</p>`
+        tempString += '<div id="moreBtn"><button type="button">More info</button></div>'
+        tempString += "</div>"
+        tempString += "</div>"
+
+        this.card = tempString;
     }
 }
