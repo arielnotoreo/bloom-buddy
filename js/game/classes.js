@@ -11,7 +11,7 @@ class Plant
         this.turningFrequency = turningFrequency;
 
         let daysSinceWatered = 0;
-        let timesWatered = 0;
+        timesWatered = 0;
         let alive = true;
     }
 
