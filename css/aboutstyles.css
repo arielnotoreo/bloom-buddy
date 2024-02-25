@@ -253,9 +253,15 @@ body {
 }
 
 #content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+   margin: 0 auto;
+   padding: 5%;
+}
+
+main {
+    margin: auto;
+}
+h3{
+    margin: 0;
 }
 
 footer {
