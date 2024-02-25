@@ -18,17 +18,22 @@ const app = new PIXI.Application(
 document.body.appendChild(app.view);
 
 // change game background color
-app.renderer.backgroundColor = 0x5e86f7;
+app.renderer.backgroundColor = 0xfbeee0;
 
 // game screen dimensions
 const sceneWidth = app.view.width;
 const sceneHeight = app.view.height;
 
 // load in assets
-app.loader.add('images/test-light-sprite.png');
-app.loader.add('images/test-plant-sprite.png');
-app.loader.add('images/test-water-sprite.png');
-app.loader.add('images/test-turn-sprite.png');
+app.loader.add('images/cactus_dead.png');
+app.loader.add('images/cactus_dying.png');
+app.loader.add('images/cactus_healthy.png');
+app.loader.add('images/primrose_dead.png');
+app.loader.add('images/primrose_dying.png');
+app.loader.add('images/primrose_healthy.png');
+app.loader.add('images/turn.png');
+app.loader.add('images/lamp.png');
+app.loader.add('images/wateringcan.png');
 app.loader.onProgress.add(e => { console.log(`progress=${e.progress}`)});
 app.loader.onComplete.add(setup);
 app.loader.load();
@@ -54,7 +59,7 @@ let isWatered = false;
 
 // create generic button style
 let genericButtonStyle = new PIXI.TextStyle({
-    fill: 0xffffff,
+    fill: 0x3b3333,
     fontSize: 48,
     fontFamily: 'Comic Sans MS'
 });
@@ -62,10 +67,10 @@ let genericButtonStyle = new PIXI.TextStyle({
 // FUNCTIONS -------------------------------------------------------------
 
 function loadSprites() {
-    plantSprite = PIXI.Texture.from('images/test-plant-sprite.png');
-    lightSprite = PIXI.Texture.from('images/test-light-sprite.png');
-    waterSprite = PIXI.Texture.from('images/test-water-sprite.png');
-    turnSprite = PIXI.Texture.from('images/test-turn-sprite.png');
+    plantSprite = PIXI.Texture.from('images/cactus_dead.png');
+    lightSprite = PIXI.Texture.from('images/lamp.png');
+    waterSprite = PIXI.Texture.from('images/wateringcan.png');
+    turnSprite = PIXI.Texture.from('images/turn.png');
 }
 
 /*
@@ -115,20 +120,20 @@ function fillMainMenuScene() {
     // create title text
     let gameTitle = new PIXI.Text("Bloom a Buddy");
     gameTitle.style = new PIXI.TextStyle({
-        fill: 0xffffff,
+        fill: 0x3b3333,
         fontSize: 96,
         fontFamily: 'Arial'
     });
 
     // position title and print to screen
-    gameTitle.x = 120;
+    gameTitle.x = sceneWidth / 2 - gameTitle.width/2;
     gameTitle.y = 120;
     mainMenuScreen.addChild(gameTitle);
 
     // create game buttons
     let startButton = new PIXI.Text("Start Game");
     startButton.style = genericButtonStyle;
-    startButton.x = sceneWidth/2 - 50;
+    startButton.x = sceneWidth/2 - startButton.width/2;
     startButton.y = sceneHeight - 200;
     startButton.interactive = true;
     startButton.buttonMode = true;
@@ -156,7 +161,7 @@ worked on by: McKenzie Lam
 function fillTutorialScene() {
     
     // draw the background of the tutorial
-    graphics.beginFill(0x000000, 1);
+    graphics.beginFill(0x54856d, 1);
     graphics.drawRect(50, 50, 700, 400);
     graphics.endFill();
     tutorialScreen.addChild(graphics);
@@ -175,7 +180,7 @@ function fillTutorialScene() {
     
     let title = new PIXI.Text("Instructions");
     title.style = new PIXI.TextStyle({
-        fill: 0xffffff,
+        fill: 0x3b3333,
         fontSize: 40,
         fontFamily: 'Arial'
     });
@@ -186,7 +191,7 @@ function fillTutorialScene() {
     let index = 0;
     let instructions = new PIXI.Text(info[index]);
     instructions.style = new PIXI.TextStyle({
-        fill: 0x000000,
+        fill: 0x3b3333,
         fontSize: 40,
         fontFamily: 'Arial'
     });
@@ -216,7 +221,7 @@ function fillTutorialScene() {
     // create game buttons
     let gameButton = new PIXI.Text("Go To Game");
     gameButton.style = genericButtonStyle;
-    gameButton.x = sceneWidth/2 - 50;
+    gameButton.x = sceneWidth/2 - gameButton.width / 2;
     gameButton.y = sceneHeight - 200;
     gameButton.interactive = true;
     gameButton.buttonMode = true;
@@ -368,7 +373,7 @@ function goTutorial() {
     tutorialScreen.visible = true;
     gameScreen.visible = false;
     mainMenuScreen.visible = false;
-    app.renderer.backgroundColor = 0xFF0000;
+    app.renderer.backgroundColor = 0xfbeee0;
     fillTutorialScene();
 }
 
@@ -388,7 +393,7 @@ function goGame() {
     tutorialScreen.visible = false;
     gameScreen.visible = true;
     mainMenuScreen.visible = false;
-    app.renderer.backgroundColor = 0xFF0080;
+    app.renderer.backgroundColor = 0x3b3333;
     fillGameScene();
 }
 
