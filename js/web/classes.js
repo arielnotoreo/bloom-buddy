@@ -5,7 +5,7 @@ class Plant
     {
         let tempString = "";
         tempString += "<div class = 'cardSmall'>"
-        tempString += `<img src = "${this.image}" alt = "" height = 100px>`
+        tempString += `<img src = "${this.image}" alt = "" height = 150px>`
         tempString += `<h3>${this.commonName}</h3>`
         tempString += "</div>"
         tempString += "<div class = 'cardExpand' display = none>"
