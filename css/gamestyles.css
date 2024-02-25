@@ -1,26 +1,112 @@
-
-#game{
-    margin: auto;
-    border: 3px solid green;
-    padding: 10px;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 
-wrapper{
-color: #3b3333;
+wrapper {
+    color: #3b3333;
 }
 
-wrapper, footer,
+wrapper,
+footer,
 select,
 input,
 button {
     font-family: "Dekko", cursive;
     font-weight: 400;
     font-style: normal;
+
+}
+
+/* unvisited link */
+a:link {
+    color: #3b3333;
+}
+
+/* visited link */
+a:visited {
+    color: #3b3333;
+}
+
+/* mouse over link */
+a:hover {
+    color: #3b3333;
+}
+
+/* selected link */
+a:active {
+    color: #3b3333;
+}
+
+
+
+.bgImg {
+    /* The image used */
+
+    position: relative;
+    text-align: left;
+
+    min-height: 60vh;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Needed to position the navbar */
+    position: relative;
+}
+
+#container {
+
+    position: relative;
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+#container image {
+    position: relative;
+
+    width: 600px;
+    height: 10px;
 }
 
 h1 {
     font-size: 5vh;
+    margin: 0;
+}
+
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+header h1 {
+    font-size: 7vh;
+    margin: 0;
+    animation-duration: 3s;
+    animation-name: slidein1;
+}
+
+@keyframes slidein1 {
+    from {
+        margin-left: 40%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
 }
 
 h2 {
@@ -29,10 +115,11 @@ h2 {
 
 select,
 input {
+    background-color: #fbeee0;
     border-radius: 25px;
     width: 40vw;
     height: 4vh;
-    font-size: 3vh;
+    font-size: 1em;
 }
 
 
@@ -68,75 +155,156 @@ button:active {
     transform: translate(2px, 2px);
 }
 
+header {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 25px;
+    height: 30vh;
+    width: 40vw;
+    margin: 12%;
+    padding-left: 20px;
+    color: white;
+    background: rgba(189, 201, 227, 0.908);
+
+}
+
+#contentHeader {
+    padding: 1px 0;
+    background-color: #54856d;
+    text-align: center;
+    border-bottom: dotted rgb(67, 52, 57);
+}
+
+#content {
+    font-family: "Yantramanav", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    background-color: #fbeee0;
+}
+
+#content .card {
+    padding:10 px;
+    width: 33vw;
+    height: 10vh;
+    background-color: white;
+}
+
+#content .card image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+
+#filters {
+    border-bottom: dotted rgb(67, 52, 57);
+}
+
+header a {
+    border-radius: 30px;
+    height: 3vh;
+    margin: auto;
+    background-color: #54856d;
+
+}
+
+/* Add a black background color to the top navigation */
+nav {
+    animation-duration: 3s;
+    animation-name: slidein;
+    background-color: #fbeee0;
+    overflow: hidden;
+    height: 7vh;
+}
+
+
+/* Style the links inside the navigation bar */
+nav a {
+    float: left;
+    color: #3b3333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 2em;
+}
+
+/* Change the color of links on hover */
+nav a:hover {
+    background-color: #deefff;
+    color: #54856d;
+    ;
+}
+
+nav image {
+    width: 20px;
+}
+
+header img {
+    height: 40px;
+    width: 200px;
+}
+
+#contentHeader {
+    font-size: 100px;
+    text-align: center;
+}
+
+#pageBtns button {
+    width: 20vw;
+}
+
+#pageBtns,
+#filters {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    padding: 10px 0;
+}
+
+body {
+    padding: 0%;
+    box-sizing: border-box;
+    background-color: #70a589;
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+footer {
+    padding: 2%;
+    background-color: #54856d;
+}
+
+select {
+    background-color: #fbeee0;
+}
+
 @media (max-width: 968px) {
     button {
         min-width: 120px;
         font-size: 14px;
         padding: 0 25px;
     }
-    #pageBtns button{
+
+    #pageBtns button {
         width: 10%;
     }
-}
-header {
-    display: flex;
-}
 
-/* Add a black background color to the top navigation */
-nav {
-    background-color: #8ABD91;
-    overflow: hidden;
-    height: 7vh;
-  }
-  
-  /* Style the links inside the navigation bar */
-nav a {
-    float: left;
-    color: #fbeee0;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 2em;
-  }
-  
-  /* Change the color of links on hover */
-nav a:hover {
-    background-color: #fbeee0;
-    color: #3b3333;
-  }
+    header {
+        display: flex;
+        flex-wrap: wrap;
+        border-radius: 25px;
+        margin: 6%;
+        padding-left: 20px;
+    }
 
+    header a {
+        margin: 0;
+        height: 5vh;
+        background-color: #54856d;
 
-#pageBtns button{
-    width: 20vw;
-    
-}
-
-#pageBtns, #filters{
-    display: flex;
-    justify-content: space-evenly;
-    margin: auto;
-    border: 3px solid green;
-    padding: 10px 0;
-}
-
-body {
-  padding: 30px;
-  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  box-sizing: border-box;
-}
-
-
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-select {
-    background-color: #fbeee0;
-}
-
-select option:hover {
-    background-color: #ffcc00; /* Change this to the desired hover color */
-    color: #3b3333; /* Change this to the desired text color on hover */
+    }
 }
