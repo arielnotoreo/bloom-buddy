@@ -602,3 +602,4 @@ function RotationTracker(rotationTracker)
 
     rotationTracker.resetTimer();
 }
+}
