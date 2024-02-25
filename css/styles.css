@@ -1,7 +1,16 @@
-wrapper, select, input, button {
-    font-family: "Indie Flower", cursive;
+
+wrapper{
+color: #3b3333;
+}
+
+wrapper,
+select,
+input,
+button {
+    font-family: "Dekko", cursive;
     font-weight: 400;
     font-style: normal;
+  
 }
 
 h1 {
@@ -12,13 +21,113 @@ h2 {
     font-size: 3vh;
 }
 
-button {
-    width: 10vw;
-    height: 3vh;
-}
-
-select, input {
+select,
+input {
+    border-radius: 25px;
     width: 40vw;
-    height: 3vh;
+    height: 4vh;
+    font-size: 3vh;
 }
 
+
+/* CSS */
+button {
+    width: 30vw;
+    height: 5vh;
+
+    background-color: #fbeee0;
+    border: 2px solid #3b3333;
+    border-radius: 30px;
+    box-shadow: #3b3333 4px 4px 0 0;
+    color: #3b3333;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+button:hover {
+    background-color: #fff;
+}
+
+button:active {
+    box-shadow: #3b3333 2px 2px 0 0;
+    transform: translate(2px, 2px);
+}
+
+@media (max-width: 968px) {
+    button {
+        min-width: 120px;
+        font-size: 14px;
+        padding: 0 25px;
+    }
+    #pageBtns button{
+        width: 10%;
+    }
+}
+header {
+    display: flex;
+}
+
+/* Add a black background color to the top navigation */
+nav {
+    background-color: #8ABD91;
+    overflow: hidden;
+    height: 7vh;
+  }
+  
+  /* Style the links inside the navigation bar */
+nav a {
+    float: left;
+    color: #fbeee0;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 2em;
+  }
+  
+  /* Change the color of links on hover */
+nav a:hover {
+    background-color: #fbeee0;
+    color: #3b3333;
+  }
+
+
+#pageBtns button{
+    width: 10vw;
+}
+
+#pageBtns, #filters{
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    border: 3px solid green;
+    padding: 10px 0;
+}
+
+body {
+  padding: 30px;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+select {
+    background-color: #fbeee0;
+}
+
+select option:hover {
+    background-color: #ffcc00; /* Change this to the desired hover color */
+    color: #3b3333; /* Change this to the desired text color on hover */
+}
