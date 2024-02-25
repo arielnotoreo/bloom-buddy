@@ -183,12 +183,13 @@ header {
 }
 
 #content .card {
+    padding:10 px;
     width: 33vw;
     height: 10vh;
     background-color: white;
 }
 
-#content .card image {
+#content .cardsmall img {
     width: 100px;
     height: 100px;
     border-radius: 50px;
