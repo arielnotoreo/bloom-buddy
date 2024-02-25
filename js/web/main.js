@@ -9,6 +9,8 @@ let pageIndex = 1;
 // Execute when the window has loaded
 window.onload = function(e) 
 {
+    document.querySelector("#next").onclick = nextPage;
+    document.querySelector("#prev").onclick = prevPage;
     let url = PLANTAPI_URL + "/api/v1/plants?" + token + "&page=" + pageIndex;
     getSpecies(url);
 }
@@ -110,4 +112,31 @@ function plantLoaded(e, index)
         content.replaceChild(plantCard.makePage(), old);
     };
 
+}
+
+function nextPage()
+{
+    if(pageIndex != 100)
+    {
+        pageIndex++;
+    }
+    load();
+}
+
+function prevPage()
+{
+    if(pageIndex != 1)
+    {
+        pageIndex--;
+    }
+    load();
+}
+
+function load()
+{
+    let content = document.querySelector("#content");
+    content.innerHTML="";
+
+    let url = PLANTAPI_URL + "/api/v1/plants?" + token + "&page=" + pageIndex;
+    getSpecies(url);
 }
