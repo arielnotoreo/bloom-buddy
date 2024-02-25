@@ -1,5 +1,31 @@
 class Plant
 {
+    // WHY METHOD NO MOVE
+    makeCard()
+    {
+        let tempString = "";
+        tempString += "<div class = 'cardSmall'>"
+        tempString += `<img src = "${this.image}" alt = "">`
+        tempString += `<h3>${this.commonName}</h3>`
+        tempString += "</div>"
+        tempString += "<div class = 'cardExpand' display = none>"
+        tempString += "<div class = 'expandLeft'>"
+        tempString += `<h4>${this.scientificName}</h4>`
+        tempString += `<p>${this.description}</p>`
+        tempString += "</div>"
+        tempString += "<div class = 'expandRight'>" 
+        tempString += `<p>Duration: ${this.duration}</p>`
+        tempString += `<p>Light: ${this.light}</p>`
+        tempString += `<p>Humidity: ${this.humidity}</p>`
+        tempString += `<p>Temperature: ${this.minTemp}-${this.maxTemp}</p>`
+        tempString += `<p>Native Location(s): ${this.nativeLocation}</p>`
+        tempString += '<div id="moreBtnContain"><button type="button" id="moreBtn">More info</button></div>'
+        tempString += "</div>"
+        tempString += "</div>"
+
+        this.card = tempString;
+    }
+    
     constructor(commonName, scientificName, image, familyName, duration, description, 
         edible, ediblePart, height, growTime, sowing, light, humidity, minTemp, maxTemp, spread, 
         minPrecipitation, maxPrecipitation, soil, nativeLocation)
@@ -32,7 +58,6 @@ class Plant
         this.soil = soil;
         this.nativeLocation = nativeLocation;
         this.card;
-        makeCard();
     }
 
     makePage()
@@ -123,30 +148,5 @@ class Plant
         // APPEND ELEMENTS (None?) --------------------------------
 
         return doc.URL;
-    }
-
-    makeCard()
-    {
-        let tempString = "";
-        tempString += "<div class = 'cardSmall'>"
-        tempString += `<img src = "${this.image}" alt = "">`
-        tempString += `<h3>${this.commonName}</h3>`
-        tempString += "</div>"
-        tempString += "<div class = 'cardExpand' display = none>"
-        tempString += "<div class = 'expandLeft'>"
-        tempString += `<h4>${this.scientificName}</h4>`
-        tempString += `<p>${this.description}</p>`
-        tempString += "</div>"
-        tempString += "<div class = 'expandRight'>" 
-        tempString += `<p>Duration: ${this.duration}</p>`
-        tempString += `<p>Light: ${this.light}</p>`
-        tempString += `<p>Humidity: ${this.humidity}</p>`
-        tempString += `<p>Temperature: ${this.minTemp}-${this.maxTemp}</p>`
-        tempString += `<p>Native Location(s): ${this.nativeLocation}</p>`
-        tempString += '<div id="moreBtn"><button type="button">More info</button></div>'
-        tempString += "</div>"
-        tempString += "</div>"
-
-        this.card = tempString;
     }
 }
