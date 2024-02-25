@@ -182,6 +182,10 @@ header {
     background-color: #fbeee0;
 }
 
+.cardsmall img {
+    border-radius: 50%;
+}
+
 #content .card {
     padding: 10px;
     width: 33vw;
@@ -189,12 +193,6 @@ header {
     background-color: white;
 }
 
-
-
-.cardsmall img {
- 
-    border-radius: 50%;
-}
 
 
 #filters {
