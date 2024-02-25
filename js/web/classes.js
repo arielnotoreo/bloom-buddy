@@ -166,7 +166,7 @@ class Plant
         doc.body.appendChild(names);
         doc.body.appendChild(info1);
         doc.body.appendChild(info2);
-        doc.URL = `${this.commonName}.html`
+        
         return doc.URL;
     }
 }
