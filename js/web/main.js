@@ -109,5 +109,5 @@ function plantLoaded(e, index)
 
 function moreClick(plantCard)
 {
-    // window.location.href = plantCard.makePage();
+     window.location.href = plantCard.makePage();
 }
