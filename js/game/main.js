@@ -48,7 +48,8 @@ let gameOverScreen;
 let environmentScreen;
 
 // sprites
-let plantSprite;
+let cactusSprite;
+let primroseSprite;
 let lightSprite;
 let waterSprite;
 let turnSprite;
@@ -66,13 +67,14 @@ let isWatered = false;
 let genericButtonStyle = new PIXI.TextStyle({
     fill: 0x3b3333,
     fontSize: 48,
-    fontFamily: 'Comic Sans MS'
+    fontFamily: 'Dekko'
 });
 
 // FUNCTIONS -------------------------------------------------------------
 
 function loadSprites() {
-    plantSprite = PIXI.Texture.from('images/test-cactus.png');
+    cactusSprite = PIXI.Texture.from('images/test-cactus.png');
+    primroseSprite = PIXI.Texture.from('images/primrose_healthy.png');
     lightSprite = PIXI.Texture.from('images/lamp.png');
     waterSprite = PIXI.Texture.from('images/wateringcan.png');
     turnSprite = PIXI.Texture.from('images/turn.png');
@@ -127,13 +129,33 @@ function fillMainMenuScene() {
     gameTitle.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 96,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
 
     // position title and print to screen
     gameTitle.x = sceneWidth / 2 - gameTitle.width/2;
     gameTitle.y = 120;
     mainMenuScreen.addChild(gameTitle);
+
+    // print plants to screen
+    let cactus = new PIXI.Sprite(cactusSprite);
+    cactus.width = 1640 / 5;
+    cactus.height = 2360 / 5;
+    cactus.x = sceneWidth - cactus.width;
+    cactus.y = sceneHeight - cactus.height +100;
+    cactus.interactive = false;
+    cactus.buttonMode = false;
+    mainMenuScreen.addChild(cactus);
+
+    let primrose = new PIXI.Sprite(primroseSprite);
+    primrose.width = 1640 / 5;
+    primrose.height = 2360 / 5;
+    primrose.x = primrose.width / 5 -100;
+    primrose.y = sceneHeight - primrose.height +85;
+    primrose.interactive = false;
+    primrose.buttonMode = false;
+    primrose.visible = false;
+    mainMenuScreen.addChild(primrose);
 
     // create game buttons
     let startButton = new PIXI.Text("Start Game");
@@ -172,14 +194,14 @@ function fillTutorialScene() {
     // display the text
     let info = [
         "Water your plant by clicking \nthe watering can", 
-        "Give your plant light by \nclicking the lamp", 
+        "Give or take away light from \nyour plant by clicking the lamp.", 
         "Turn your plant so it gets \nan even amount of light"]
     
     let title = new PIXI.Text("Instructions");
     title.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 40,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
     title.x = sceneWidth / 2 - title.width/2;
     title.y = 50;
@@ -190,9 +212,9 @@ function fillTutorialScene() {
     instructions.style = new PIXI.TextStyle({
         fill: 0x3b3333,
         fontSize: 40,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
-    instructions.x = sceneWidth / 2 - instructions.width/2;
+    instructions.x = sceneWidth / 2 - instructions.width/2 - 25;
     instructions.y = 120;
     tutorialScreen.addChild(instructions);
 
@@ -200,7 +222,7 @@ function fillTutorialScene() {
     let nextButton = new PIXI.Text("--->", {
         fill: 0x3b3333,
         fontSize: 24,
-        fontFamily: "Arial"
+        fontFamily: "Dekko"
       });
     nextButton.width = 50;
     nextButton.height = 50;
@@ -275,7 +297,7 @@ function fillGameScene() {
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
-    waterButton.on("pointerdown", function(){watterButtonClicked = true;});
+    //waterButton.on("pointerdown", function(){watterButtonClicked = true;});
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -312,7 +334,7 @@ function fillGameScene() {
     waterLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     })
     waterLabel.x = 150;
     waterLabel.y = sceneHeight - 50;
@@ -322,7 +344,7 @@ function fillGameScene() {
     lightLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     })
     lightLabel.x = 350;
     lightLabel.y = sceneHeight - 50;
@@ -332,7 +354,7 @@ function fillGameScene() {
     turnLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 24,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     })
     turnLabel.x = 550;
     turnLabel.y = sceneHeight - 50;
@@ -342,9 +364,10 @@ function fillGameScene() {
     // temp plant
     let tempPlantTexture = PIXI.Texture.from('images/cactus_healthy.png');
     let tempPlant = new PIXI.Sprite(tempPlantTexture);
+    tempPlant.width = 200;
     tempPlant.x = sceneWidth / 2 - tempPlant.texture.width/2;
     tempPlant.y = 200;
-    gameScreen.add(tempPlant); 
+    gameScreen.addChild(tempPlant); 
 
     // create the plant
     /*
@@ -361,7 +384,7 @@ function fillGameOverScene() {
     text.style = new PIXI.TextStyle({
         fill: 0xffffff,
         fontSize: 56,
-        fontFamily: 'Arial'
+        fontFamily: 'Dekko'
     });
     text.x = 10;
     text.y = 10;
