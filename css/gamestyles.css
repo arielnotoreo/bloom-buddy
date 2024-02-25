@@ -9,11 +9,7 @@ wrapper {
     color: #3b3333;
 }
 
-wrapper,
-footer,
-select,
-input,
-button {
+nav {
     font-family: "Dekko", cursive;
     font-weight: 400;
     font-style: normal;
@@ -262,6 +258,7 @@ header img {
 }
 
 body {
+    text-align: center;
     padding: 0%;
     box-sizing: border-box;
     background-color: #70a589;
