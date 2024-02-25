@@ -139,7 +139,7 @@ class Plant
         names.classList.add("names");
         info1.classList.add("info1");
         info2.classList.add("info2");
-        wrap.classList.add("card");
+        wrap.classList.add("cardExpand");
 
         // APPEND ELEMENTS (None?) --------------------------------
         wrap.appendChild(image);
