@@ -1,5 +1,6 @@
 class Plant
 {
+    // pls move the method
     makeCard()
     {
         let tempString = "";
