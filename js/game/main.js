@@ -40,15 +40,16 @@ let tutorialScreen;
 let gameScreen;
 let gameOverScreen;
 
+//tracker variables
+let waterButtonClicked = false;
+let lightButtonClicked = false;
+let rotationButtonClicked = false;
 
 // sprites
 let plantSprite;
 let lightSprite;
 let waterSprite;
 let turnSprite;
-
-// plant tracker variables
-let plant;
 
 let numClicks = 0;
 let isWatered = false;
@@ -193,7 +194,7 @@ function fillGameScene() {
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
-    waterButton.on("pointerdown", function(){watterButtonClicked = true;});
+    waterButton.on("pointerdown", function(){console.log("water clicked"); watterButtonClicked = true;});
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -206,7 +207,7 @@ function fillGameScene() {
     lightButton.y = sceneHeight - 150;
     lightButton.interactive = true;
     lightButton.buttonMode = true;
-    //lightButton.on("pointerup", clicked);
+    lightButton.on("pointerdown", lightButtonClicked = true);
     lightButton.on('pointerover', e => e.target.alpha = 0.7);
     lightButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(lightButton);
@@ -219,7 +220,7 @@ function fillGameScene() {
     turnButton.y = sceneHeight - 150;
     turnButton.interactive = true;
     turnButton.buttonMode = true;
-    //turnButton.on("pointerup", clicked);
+    turnButton.on("pointerdown", rotationButtonClicked = true);
     turnButton.on('pointerover', e => e.target.alpha = 0.7);
     turnButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(turnButton);
@@ -258,12 +259,12 @@ function fillGameScene() {
     //#endregion
 
     // create the plant
-    plant = new Plant(plantSprite, 100, 100);
+    let plant = new Plant(plantSprite, 100, 100, true);
     gameScreen.addChild(plant.container);
     plant.setPosition(sceneWidth / 2, 200);
 
     // begin the game
-    gameLoop();
+    gameLoop(plant);
 }
 
 function fillGameOverScene() {
@@ -315,16 +316,17 @@ function goGameOver() {
 }
 //#endregion
 
-
-function gameLoop()
+/* Game loop function and helper methods that handles the win/lose conditions, and
+majority game logic.
+Worked on by Ariel Enzhu Cthwe
+*/
+function gameLoop(plant)
 {
-    let waterButtonClicked = false;
-    let lightButtonClicked = false;
-    let rotationButtonClicked = false;
-
-    if (indoorPlant)
+    if (plant.isIndoor)
     {
         let waterTracker = new WaterTracker(3, 6);
+        let lightTracker = new LightTracker(2, 4);
+        let rotationTracker = new RotationTracker(4, 6);
 
         while (plant.alive == true)
         {
@@ -332,21 +334,24 @@ function gameLoop()
             DayCycle(0);
 
             WaterTracker(waterTracker);
+            LightTracker(lightTracker);
+            RotationTracker(rotationTracker);
         }
     }
-    else if (outdoorPlant)
+    else if (!plant.isIndoor)
     {
         let waterTracker = new WaterTracker(1, 3);
+        let lightTracker = new LightTracker(3, 2);
+        let rotationTracker = new RotationTracker(2, 6);
 
         while (plant.alive == true)
         {
             //day cycle
             DayCycle(0);
     
-            
-    
-            plant.WaterTracker();
-            plant.IsAlive();
+            WaterTracker(waterTracker);
+            LightTracker(lightTracker);
+            RotationTracker(rotationTracker);   
         }
     }
 }
@@ -367,10 +372,6 @@ function DayCycle(dayCounter)
     dayCounter++;
 
     setTimeout(function(){DayCycle(dayCounter)}, 30000);
-
-    //possibly figure out if we need a reset if game over
-
-    
 }
 
 function WaterTracker(waterTracker)
@@ -399,19 +400,54 @@ function WaterTracker(waterTracker)
     waterTracker.resetTimer();
 }
 
-function LightTracker(frequency, maxLimit)
+function LightTracker(lightTracker)
 {
-    let lightTracker = new LightTracker(frequency, maxLimit);
-
     lightTracker.startTimer();
 
-    if (watterButtonClicked)
+    if (lightButtonClicked)
     {
+        lightTracker.daysSince = 0;
         lightTracker.count++;
-        lightTracker.resetTimer();
     }
     else
     {
-        lightTracker.resetTimer();
+        lightTracker.daysSince++;
     }
+
+    if (lightTracker.isLimitReached)
+    {
+        plant.alive = false;
+    }
+    else
+    {
+        lightTracker.count = 0;
+    }
+
+    lightTracker.resetTimer();
+}
+
+function RotationTracker(rotationTracker)
+{
+    rotationTracker.startTimer();
+
+    if (rotationButtonClicked)
+    {
+        rotationTracker.daysSince = 0;
+        rotationTrackerTracker.count++;
+    }
+    else
+    {
+        rotationTracker.daysSince++;
+    }
+
+    if (rotationTracker.isLimitReached)
+    {
+        plant.alive = false;
+    }
+    else
+    {
+        rotationTracker.count = 0;
+    }
+
+    rotationTracker.resetTimer();
 }

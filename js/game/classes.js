@@ -1,8 +1,11 @@
-//Worked on by Ariel Enzhu Cthwe
+/*Worked on by Ariel Enzhu Cthwe
+
+Plant and Tracker classes that create objects for each plant as necessary
+*/
 
 class Plant
 {
-    constructor(pattern, width, height)
+    constructor(pattern, width, height, isIndoor)
     {
         this.pattern = new PIXI.Sprite(pattern);
         this.container = new PIXI.Container();
@@ -13,6 +16,7 @@ class Plant
         this.y = 200;
 
         this.alive = true;
+        this.isIndoor = true;
     }
 
     setPosition(x, y) 
@@ -74,8 +78,3 @@ class RotationTracker extends Tracker
     }
 }
 
-// // Example usage
-// const waterTracker = new WaterTracker(3, 5);
-// waterTracker.startTimer();
-// waterTracker.buttonClicked();
-// console.log(waterTracker.isLimitReached()); // Check if limit is reached
