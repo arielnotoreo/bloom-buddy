@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 // Define the base URL for the Plant API
 const PLANTAPI_URL = "https://trefle.io";
