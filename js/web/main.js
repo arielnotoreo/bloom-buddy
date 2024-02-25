@@ -3,7 +3,7 @@
 // Define the base URL for the Plant API
 const PLANTAPI_URL = "https://trefle.io";
 
-const token = "token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozNDY1LCJv…Q.02vtbClEDZ8MdHzm30LBwI38IzC9pUnAw60a7-R-so8";
+const token = "token=eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDYsIm9yaWdpbiI6IllPVVItV0VCU0lURS1VUkwiLCJpcCI6IlRIRS1XRUJTSVRFLVVTRVItSVAiLCJleHAiOjE1OTQ2NDIxNDh9.Vd2d3UK7zdNWZLBOn8y50NcUKuF8xFZgh6p7EB4fhVw";
 let pageIndex = 1;
 
 // Execute when the window has loaded
