@@ -1,5 +1,31 @@
 class Plant
 {
+    // WHY METHOD NO MOVE
+    makeCard()
+    {
+        let tempString = "";
+        tempString += "<div class = 'cardSmall'>"
+        tempString += `<img src = "${this.image}" alt = "">`
+        tempString += `<h3>${this.commonName}</h3>`
+        tempString += "</div>"
+        tempString += "<div class = 'cardExpand' display = none>"
+        tempString += "<div class = 'expandLeft'>"
+        tempString += `<h4>${this.scientificName}</h4>`
+        tempString += `<p>${this.description}</p>`
+        tempString += "</div>"
+        tempString += "<div class = 'expandRight'>" 
+        tempString += `<p>Duration: ${this.duration}</p>`
+        tempString += `<p>Light: ${this.light}</p>`
+        tempString += `<p>Humidity: ${this.humidity}</p>`
+        tempString += `<p>Temperature: ${this.minTemp}-${this.maxTemp}</p>`
+        tempString += `<p>Native Location(s): ${this.nativeLocation}</p>`
+        tempString += '<div id="moreBtnContain"><button type="button" id="moreBtn">More info</button></div>'
+        tempString += "</div>"
+        tempString += "</div>"
+
+        this.card = tempString;
+    }
+    
     constructor(commonName, scientificName, image, familyName, duration, description, 
         edible, ediblePart, height, growTime, sowing, light, humidity, minTemp, maxTemp, spread, 
         minPrecipitation, maxPrecipitation, soil, nativeLocation)
@@ -32,19 +58,18 @@ class Plant
         this.soil = soil;
         this.nativeLocation = nativeLocation;
         this.card;
-        makeCard();
     }
 
     makePage()
     {
-        // Make the new webpage
-        let doc = document.implementation.createHTMLDocument(this.commonName);
+        // Make the new container
+        let wrap = document.createElement("div");
         
         // CREATE ELEMENTS ----------------------------------------
-        let image = doc.createElement("div");
-        let names = doc.createElement("div");
-        let info1 = doc.createElement("div");
-        let info2 = doc.createElement("div");
+        let image = document.createElement("div");
+        let names = document.createElement("div");
+        let info1 = document.createElement("div");
+        let info2 = document.createElement("div");
 
         //#region  CREATE INFO --------------------------------------------
 
@@ -96,13 +121,13 @@ class Plant
 
         // INFO2 CODE
         let info2String = "";
-        info1String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
-        info1String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
-        info1String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
-        info1String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
-        info1String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
-        info1String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
-        info1String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
+        info2String += `<p class = 'details'><strong>Grow Time</strong>: ${this.growTime}</p>`;
+        info2String += `<p class = 'details'><strong>Light</strong>: ${this.light}</p>`;
+        info2String += `<p class = 'details'><strong>Temperature</strong>: ${this.minTemp}-${this.maxTemp}</p>`;
+        info2String += `<p class = 'details'><strong>Humidity</strong>: ${this.humidity}</p>`;
+        info2String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
+        info2String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
+        info2String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
 
         // FOOTER CODE
 
@@ -119,34 +144,14 @@ class Plant
         names.classList.add("names");
         info1.classList.add("info1");
         info2.classList.add("info2");
+        wrap.classList.add("card");
 
         // APPEND ELEMENTS (None?) --------------------------------
+        wrap.appendChild(image);
+        wrap.appendChild(names);
+        wrap.appendChild(info1);
+        wrap.appendChild(info2);
 
-        return doc.URL;
-    }
-
-    makeCard()
-    {
-        let tempString = "";
-        tempString += "<div class = 'cardSmall'>"
-        tempString += `<img src = "${this.image}" alt = "">`
-        tempString += `<h3>${this.commonName}</h3>`
-        tempString += "</div>"
-        tempString += "<div class = 'cardExpand' display = none>"
-        tempString += "<div class = 'expandLeft'>"
-        tempString += `<h4>${this.scientificName}</h4>`
-        tempString += `<p>${this.description}</p>`
-        tempString += "</div>"
-        tempString += "<div class = 'expandRight'>" 
-        tempString += `<p>Duration: ${this.duration}</p>`
-        tempString += `<p>Light: ${this.light}</p>`
-        tempString += `<p>Humidity: ${this.humidity}</p>`
-        tempString += `<p>Temperature: ${this.minTemp}-${this.maxTemp}</p>`
-        tempString += `<p>Native Location(s): ${this.nativeLocation}</p>`
-        tempString += '<div id="moreBtn"><button type="button">More info</button></div>'
-        tempString += "</div>"
-        tempString += "</div>"
-
-        this.card = tempString;
+        return wrap;
     }
 }
