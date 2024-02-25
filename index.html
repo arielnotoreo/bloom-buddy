@@ -7,16 +7,18 @@
     <title>Bloom Buddy</title>
 
     <style>
-       .bgImg {
-        background-image: url('temp1.jpg');
-        background-color: pink;
-       }
+        .bgImg {
+            background-image: url('temp1.jpg');
+            background-color: pink;
+        }
     </style>
 
     <link rel="stylesheet" href="css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dekko&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dekko&family=Nanum+Pen+Script&family=Yantramanav:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
 </head>
 <wrapper>
 
@@ -29,10 +31,11 @@
                 <a href="game.html">Bloom a Buddy</a>
             </nav>
             <header>
-                <h1>Welcome to </h1> <img src="temp/heading.png" alt="">
-                <a href="#contentHeader">Click here to see the content below.</a>
+                <h1>Welcome to Bloom Buddy!</h1> <!-- <img src="temp/heading.png" alt=""> -->
+                <!-- <h2>Your plant care best friend</h2>  -->
+                <a href="#contentHeader">Jump to Guides</a>
             </header>
-          
+
         </div>
 
 
@@ -40,8 +43,8 @@
 
     <body>
 
-        <script src = "js/web/classes.js"></script>
-        <script src = "js/web/main.js"></script>
+        <script src="js/web/classes.js"></script>
+        <script src="js/web/main.js"></script>
 
         <main>
             <div id="contentHeader">
@@ -81,15 +84,15 @@
                     </optgroup>
                 </select>
                 <input type="text" placeholder="Search for Plants...">
+                <button type="button">search</button>
             </div>
             <!-- //for plants to be populated -->
             <div id="content">
-                <p>content</p>
             </div>
             <!-- //to navigate pages -->
             <div id="pageBtns">
-                <button type="button">previous page</button>
-                <button type="button">next page</button>
+                <button type="button" id="prev">previous page</button>
+                <button type="button" id="next">next page</button>
 
             </div>
         </main>

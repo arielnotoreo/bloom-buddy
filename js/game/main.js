@@ -48,6 +48,7 @@ let waterSprite;
 let turnSprite;
 
 // plant tracker variables
+let plant;
 let numClicks = 0;
 let isWatered = false;
 
@@ -270,7 +271,7 @@ function fillGameScene() {
     waterButton.y = sceneHeight - 150;
     waterButton.interactive = true;
     waterButton.buttonMode = true;
-    //waterButton.on("pointerup", clicked);
+    waterButton.on("pointerdown", function(){watterButtonClicked = true;});
     waterButton.on('pointerover', e => e.target.alpha = 0.7);
     waterButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(waterButton);
@@ -335,12 +336,12 @@ function fillGameScene() {
     //#endregion
 
     // create the plant
-    let plant = new Plant(plantSprite, 100, 100);
+    plant = new Plant(plantSprite, 100, 100);
     gameScreen.addChild(plant.container);
     plant.setPosition(sceneWidth / 2, 200);
 
     // begin the game
-    //gameLoop();
+    gameLoop();
 }
 
 function fillGameOverScene() {
@@ -399,6 +400,7 @@ function goGameOver() {
 }
 //#endregion
 
+
 function gameLoop()
 {
     while (plant.alive == true)
@@ -406,22 +408,4 @@ function gameLoop()
         plant.WaterTracker();
         plant.IsAlive();
     }
-}
-
-function onNextButtonClick(text, scene, index) {
-    // progress to the next line of text
-  index++;
-
-  // determine if there are more lines in the story
-  if (index < text.length) {
-    
-    // update story text
-    instructions.text = text[currentTextIndex];
-  } else {
-    
-    // transition to the next screen
-    currentTextIndex = 0;
-    instructions = null;
-    scene();
-  }
 }
