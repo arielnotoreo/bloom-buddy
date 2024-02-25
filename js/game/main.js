@@ -172,6 +172,22 @@ function fillGameScene() {
     gameButton.on('pointerover', e => e.target.alpha = 0.7);
     gameButton.on('pointerout', e => e.currentTarget.alpha = 1.0);
     gameScreen.addChild(gameButton);
+
+    let plant = new PIXI.Text("PLANT");
+    plant.style = genericButtonStyle;
+    plant.x = sceneWidth/2 - 50;
+    plant.y = sceneHeight - 200;
+    plant.interactive = true;
+    plant.buttonMode = true;
+    plant.on("pointerup", function() {
+        goGameOver();
+    });
+    plant.on('pointerover', e => e.target.alpha = 0.7);
+    plant.on('pointerout', e => e.currentTarget.alpha = 1.0);
+    plant.addChild(gameButton);
+
+    let mom = new Plant();
+
 }
 
 function fillGameOverScene() {
