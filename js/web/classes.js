@@ -11,7 +11,7 @@ class Plant
         tempString += "<div class = 'cardExpand' display = none>"
         tempString += "<div class = 'expandLeft'>"
         tempString += `<h4>${this.scientificName}</h4>`
-        tempString += `<p>${this.description}</p>`
+        tempString += `<p>${this.familyName}</p>`
         tempString += "</div>"
         tempString += "<div class = 'expandRight'>" 
         tempString += `<p>Duration: ${this.duration}</p>`
