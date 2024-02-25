@@ -73,15 +73,12 @@ class Plant
 
         //#region  CREATE INFO --------------------------------------------
 
-        // HEADER CODE
-        // NAVBAR CODE
-
         // IMAGE CODE
         let imageString = "";
 
         if (this.image) 
         {
-            imageString += `<img src="${this.image}" alt=""  height = 100px>`;
+            imageString += `<img src="${this.image}" alt=""  height = 100px border-radius = 50%>`;
         }
 
         // NAMES CODE
@@ -128,8 +125,6 @@ class Plant
         info2String += `<p class = 'details'><strong>Precipitation</strong>: ${this.minPrecipitation}-${this.maxPrecipitation}</p>`;
         info2String += `<p class = 'details'><strong>Sowing</strong>: ${this.sowing}</p>`;
         info2String += `<p class = 'details'><strong>Soil</strong>: ${this.soil}</p>`;
-
-        // FOOTER CODE
 
         //#endregion
 
