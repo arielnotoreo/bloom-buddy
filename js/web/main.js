@@ -109,7 +109,7 @@ function plantLoaded(e, index)
 
 function moreClick(plantCard)
 {
-    let old = document.getElementById("#card");
+    let old = this.parentNode.parentNode.parentNode;
     let content = document.querySelector("#content");
     content.replaceChild(plantCard.makePage(), old);
 }
