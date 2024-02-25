@@ -187,6 +187,7 @@ header {
 }
 
 #content .card {
+    font-size: 8pt;
     padding: 10px;
     width: 33vw;
     height: 30vh;
@@ -195,9 +196,12 @@ header {
 
 
 
+
 #filters {
     border-bottom: dotted rgb(67, 52, 57);
 }
+
+
 
 header a {
     border-radius: 30px;
