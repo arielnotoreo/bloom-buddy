@@ -58,7 +58,6 @@ class Plant
         this.soil = soil;
         this.nativeLocation = nativeLocation;
         this.card;
-        makeCard();
     }
 
     makePage()
