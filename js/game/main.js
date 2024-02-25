@@ -67,7 +67,7 @@ let genericButtonStyle = new PIXI.TextStyle({
 // FUNCTIONS -------------------------------------------------------------
 
 function loadSprites() {
-    plantSprite = PIXI.Texture.from('images/cactus_dead.png');
+    plantSprite = PIXI.Texture.from('images/primrose_healthy.png');
     lightSprite = PIXI.Texture.from('images/lamp.png');
     waterSprite = PIXI.Texture.from('images/wateringcan.png');
     turnSprite = PIXI.Texture.from('images/turn.png');
@@ -308,7 +308,7 @@ function fillGameScene() {
     gameScreen.addChild(turnButton);
     //#endregion
 
-    //#region TEMP LABELS
+    //#region labels
     let waterLabel = new PIXI.Text("Water");
     waterLabel.style = new PIXI.TextStyle({
         fill: 0xffffff,
@@ -316,7 +316,7 @@ function fillGameScene() {
         fontFamily: 'Arial'
     })
     waterLabel.x = 150;
-    waterLabel.y = sceneHeight - 100;
+    waterLabel.y = sceneHeight - 50;
     gameScreen.addChild(waterLabel);
 
     let lightLabel = new PIXI.Text("Light");
@@ -326,7 +326,7 @@ function fillGameScene() {
         fontFamily: 'Arial'
     })
     lightLabel.x = 350;
-    lightLabel.y = sceneHeight - 100;
+    lightLabel.y = sceneHeight - 50;
     gameScreen.addChild(lightLabel);
 
     let turnLabel = new PIXI.Text("Turn");
@@ -336,17 +336,25 @@ function fillGameScene() {
         fontFamily: 'Arial'
     })
     turnLabel.x = 550;
-    turnLabel.y = sceneHeight - 100;
+    turnLabel.y = sceneHeight - 50;
     gameScreen.addChild(turnLabel);
     //#endregion
 
+    // temp plant
+    let tempPlantTexture = PIXI.Texture.from('images/cactus_healthy.png');
+    let tempPlant = new PIXI.Sprite(tempPlantTexture);
+    tempPlant.x = sceneWidth / 2 - tempPlant.texture.width/2;
+    tempPlant.y = 200;
+    gameScreen.addChild(tempPlant);
+
     // create the plant
+    /*
     plant = new Plant(plantSprite, 100, 100);
     gameScreen.addChild(plant.container);
-    plant.setPosition(sceneWidth / 2, 200);
+    plant.setPosition(sceneWidth / 2, 200); */
 
     // begin the game
-    gameLoop();
+    //gameLoop();
 }
 
 function fillGameOverScene() {
@@ -410,7 +418,7 @@ function gameLoop()
 {
     while (plant.alive == true)
     {
-        plant.WaterTracker();
-        plant.IsAlive();
+        //plant.WaterTracker();
+        //plant.IsAlive();
     }
 }
